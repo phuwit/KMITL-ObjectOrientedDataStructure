@@ -29,20 +29,20 @@ class Translator:
         return roman
 
     def roman_to_decimal(self, string: str):
-        total = 0
-        previous_value = 0
-        symbols = reversed(string)
-        for symbol, value in reversed(self.__symbols.items()):
-            for current_symbol in symbols:
-                if current_symbol == symbol:
-                    if value > previous_value:
-                        total += value
-                    previous_value = value
-                elif value > 
-                    total -= previous_value
-                else:
-                    break
-        return total
+        digit_values = [self.__symbols[char] for char in string][::-1]
+        # print(digit_values)
+        subtract_value = 0
+        subtotal = 0
+        cursor: int = 0
+        while cursor < (len(digit_values) - 1):
+            if digit_values[cursor] > digit_values[cursor+1]:
+                subtract_value += digit_values.pop(cursor+1)
+            cursor += 1
+
+        for i in digit_values:
+            subtotal += i
+        # print(subtotal, subtract_value)
+        return subtotal - subtract_value
 
 number = int(input("Enter number to translate : "))
 
