@@ -17,18 +17,19 @@ print('*** Fun with permute ***')
 input_string = input('input : ')
 input_list = [int(n) for n in input_string.split(",")]
 
-possible_permutations: list[list[int]] = []
-
-print(f'Original Cofllection: {input_list}')
+print(f'Original Cofllection:  {input_list}')
 
 reversed_input_list = list(reversed(input_list))
-possible_permutations.append(reversed_input_list)
-LIST_LENGTH = range(len(reversed_input_list))
+LIST_LENGTH = len(reversed_input_list)
 
-def swap_pairs(numbers: list[int], start_index: int = 0) -> list[list[int]]:
+def swap_pairs(numbers: list[int], start_index: int = 0, _reversed: bool = False) -> list[list[int]]:
     permutations: list[list[int]] = [numbers]
     length = len(numbers)
-    for i in range(start_index, length - 1):
+    cursor_indexes = range(start_index, length - 1)
+    if _reversed:
+        cursor_indexes = cursor_indexes[::-1]
+
+    for i in cursor_indexes:
         current = list(permutations[-1])
         cursor_a = i
         cursor_b = i + 1
@@ -42,8 +43,10 @@ def permute(numbers: list[int]) -> list[list[int]]:
     permutations: list[list[int]] = []
     for i in swap_pairs(numbers, start_index=1):
         permutations.extend(swap_pairs(i))
+    for i in swap_pairs(numbers, start_index=0, _reversed=True):
+        permutations.extend(swap_pairs(i))
 
     return permutations
 
-# print(permute(reversed_input_list))
-print(f'Collection of distinct numbers:\n {permute(reversed_input_list)}')
+possible_permutations = permute(reversed_input_list)
+print(f'Collection of distinct numbers:\n {possible_permutations}')
