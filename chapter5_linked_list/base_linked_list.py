@@ -132,8 +132,10 @@ class SinglyLinkedList:
             current_node = current_node.next
         return size
 
-    def pop(self, pos):
+    def pop(self, pos = None):
         index = 1
+        if pos is None:
+            pos = self.size() - 1
         if pos > self.size() - 1 or pos < 0:
             return "Out of Range"
         elif pos == 0 and self.__head and not self.__head.next:
@@ -149,6 +151,33 @@ class SinglyLinkedList:
                     return "Success"
                 index += 1
                 pre_node = current_node
+                current_node = current_node.next
+        return "Out of Range"
+
+    def peek(self, pos = None):
+        """
+        Return the item at the specified position in the linked list.
+
+        Args:
+            pos (int): The position of the item to retrieve. If not specified, the last item will be returned.
+
+        Returns:
+            Any: The item at the specified position, or "Out of Range" if the position is invalid.
+        """
+        index = 0
+        if pos is None:
+            pos = self.size() - 1
+        if pos > self.size() - 1 or pos < 0:
+            return "Out of Range"
+        if pos == 0 and self.__head and not self.__head.next:
+            return self.__head.item
+        if self.__head and self.__head.next:
+            current_node = self.__head
+
+            while current_node.next:
+                index += 1
+                if index == pos:
+                    return current_node.next.item
                 current_node = current_node.next
         return "Out of Range"
 
@@ -226,8 +255,10 @@ class DoublyLinkedList:
             current_node = current_node.next
         return size
 
-    def pop(self, pos):
+    def pop(self, pos = None):
         index = 1
+        if pos is None:
+            pos = self.size() - 1
         if pos > self.size() - 1 or pos < 0:
             return "Out of Range"
         elif pos == 0 and self.__head and not self.__head.next:
@@ -243,5 +274,23 @@ class DoublyLinkedList:
                     return "Success"
                 index += 1
                 pre_node = current_node
+                current_node = current_node.next
+        return "Out of Range"
+
+    def peek(self, pos = None):
+        index = 1
+        if pos is None:
+            pos = self.size() - 1
+        if pos > self.size() - 1 or pos < 0:
+            return "Out of Range"
+        elif pos == 0 and self.__head and not self.__head.next:
+            return self.__head.item
+        elif self.__head and self.__head.next:
+            current_node = self.__head.next
+
+            while current_node.next:
+                if index == pos:
+                    return current_node.item
+                index += 1
                 current_node = current_node.next
         return "Out of Range"
