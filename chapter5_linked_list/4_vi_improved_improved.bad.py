@@ -49,3 +49,40 @@ I Love | KMITL
 Enter Input : I I,I KMITL,L,L,R,I Love,D,I DataStructure,L,L,R,L,R,B,I Hate
 I Hate | DataStructure
 '''
+
+from base_linked_list import SinglyLinkedList
+
+class Cursor:
+    def __init__(self, _linked_list) -> None:
+        self.__linked_list: SinglyLinkedList = _linked_list
+        self.__index: int = 0
+
+    def move_left(self):
+        self.__index -= 1
+        if self.__index < 0:
+            self.__index = 0
+
+    def move_right(self):
+        self.__index += 1
+        if self.__index > self.__linked_list.size():
+            self.__index = self.__linked_list.size()
+
+commands = input('Enter Input : ').split(',')
+
+linked_list = SinglyLinkedList()
+cursor = Cursor(linked_list)
+
+for command in commands:
+    try:
+        word = command.split().pop()
+        linked_list.append(word)
+
+    except Exception:
+        if command[0] == 'L':
+            cursor.move_left()
+            continue
+        elif command[0] == 'R':
+            cursor.move_right()
+            continue
+
+print()

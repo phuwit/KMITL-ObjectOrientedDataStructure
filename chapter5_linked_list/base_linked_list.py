@@ -91,15 +91,24 @@ class SinglyLinkedList:
     def is_empty(self):
         return self.__head is None
 
-    def append(self, item):
-        new_node = SinglyLinkedNode(item=item, next=None)
-        if not self.__head:
-            self.__head = new_node
-            return
-        current_node = self.__head
-        while current_node.next:
-            current_node = current_node.next
-        current_node.next = new_node
+    def append(self, item = None, index = None):
+        if index is None or index == self.size() - 1:
+            new_node = SinglyLinkedNode(item=item, next=None)
+            if not self.__head:
+                self.__head = new_node
+                return
+            current_node = self.__head
+            while current_node.next:
+                current_node = current_node.next
+            current_node.next = new_node
+        else:
+            previous_node = self.__head
+            while previous_node:
+                if previous_node.next and previous_node.next.item == item:
+                    break
+                previous_node = previous_node.next
+
+            previous_node.
 
     def append_head(self, item):
         old_node = self.__head
