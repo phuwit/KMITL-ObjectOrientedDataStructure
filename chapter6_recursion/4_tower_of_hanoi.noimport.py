@@ -1,13 +1,16 @@
+num_disks = int(input("Enter Input : "))
+print_height = num_disks + 1
+
 class Peg:
-    def __init__(self, symbol):
+    def __init__(self, symbol) -> None:
         self.__disks = []
         self.symbol = symbol
 
-    def add_disk(self, disk):
+    def add_disk(self, disk: int):
         if not self.__disks:
             self.__disks.append(disk)
             return True
-        if self.__disks[-1] < disk:
+        if disk < self.__disks[-1]:
             self.__disks.append(disk)
             return True
         return False
@@ -25,7 +28,7 @@ def print_tower(pegs):
         row = []
         for peg in pegs:
             if len(peg.get_all_disks()) >= i:
-                row.append(str(peg.get_all_disks()[::-1][i-1]))
+                row.append(str(peg.get_all_disks()[i-1]))
             else:
                 row.append('|')
         tower.append('  '.join(row))
@@ -44,18 +47,16 @@ def solve(num_disks, from_peg, to_peg):
     helper_peg = get_helper_peg(pegs, from_peg, to_peg)
     solve(num_disks=num_disks-1, from_peg=from_peg, to_peg=helper_peg)
     to_peg.add_disk(from_peg.remove_disk())
-    solve(num_disks=num_disks-1, from_peg=helper_peg, to_peg=to_peg)
 
     print(f'move {num_disks} from  {from_peg.symbol} to {to_peg.symbol}')
     print_tower(pegs)
 
-num_disks = int(input("Enter Input : "))
-print_height = num_disks + 1
+    solve(num_disks=num_disks-1, from_peg=helper_peg, to_peg=to_peg)
 
 pegs = [Peg('A'), Peg('B'), Peg('C')]
 
 source_peg = pegs[0]
-for i in range(1, num_disks+1):
+for i in range(num_disks, 0, -1):
     source_peg.add_disk(i)
 print_tower(pegs)
 
