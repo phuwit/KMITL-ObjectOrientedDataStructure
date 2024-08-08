@@ -1,0 +1,43 @@
+from typing import List, Tuple
+
+
+VALID_PARENTHESES = {"(": ")"}
+
+
+class Solution:
+    def longestValidParentheses(self, s: str) -> int:
+        stack: List[Tuple[int, str]] = list()
+        valid_indexes: List[int] = list()
+        for i, char in enumerate(s):
+            stack.append((i, char))
+            for key, value in VALID_PARENTHESES.items():
+                if len(stack) >= 2 and stack[-2][1] == key and stack[-1][1] == value:
+                    valid_indexes.append(stack.pop(-2)[0])
+                    valid_indexes.append(stack.pop(-1)[0])
+                    break
+
+        valid_indexes.sort()
+
+        if len(stack) == 0:
+            return len(s)
+        if len(valid_indexes) == 0:
+            return 0
+
+        counts: List[int] = [0]
+        last_index = valid_indexes.pop(0)
+        for index in valid_indexes:
+            if index - last_index == 1:
+                counts[-1] += 1
+                last_index = index
+                continue
+            last_index = index
+            counts.append(0)
+
+        max = 0
+        for i in counts:
+            if i > max:
+                max = i
+                continue
+        return max + 1
+
+print(Solution().longestValidParentheses(')(())))(())())'))
