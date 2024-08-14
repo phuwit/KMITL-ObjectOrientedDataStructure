@@ -301,7 +301,6 @@ the last result
 
 """
 
-
 from typing import List
 
 
@@ -318,7 +317,7 @@ class TreeNode:
         code_point = 0
         for magnitude, char in enumerate(self.data[::-1]):
             code_point += ord(char) * (2 ** (8 * magnitude))
-        return -1
+        return code_point
 
 
 class Tree:
@@ -326,12 +325,13 @@ class Tree:
         self.root = None
 
     def search(self, node_data: str):
-        current_node = self.root
         queue = [self.root]
-        while current_node:
+        while len(queue):
+            current_node = queue.pop()
+            if not current_node:
+                return
             if current_node.data == node_data:
                 return current_node
-            queue.pop(0)
             queue.append(current_node.left)
             queue.append(current_node.right)
 
@@ -363,12 +363,12 @@ class Tree:
         if not node:
             return False
 
-        if node.left:
-            node.left = None
-            return True
-
         if node.right:
             node.right = None
+            return True
+
+        if node.left:
+            node.left = None
             return True
 
         return False
@@ -400,11 +400,43 @@ class Tree:
         _nodes.append(node)
         return _nodes
 
+    def travelsal_formatter(
+        self, traversal_result: List[TreeNode], ascii_until: str
+    ) -> str:
+        formatted: List[str] = []
+        for i in traversal_result:
+            if i.get_code_points() <= ord(ascii_until):
+                formatted.append(str(i.get_code_points()))
+                continue
+            formatted.append(str(i.data))
+        return " ".join(formatted)
+
+    def get_traversals(self, from_node, ascii_until):
+        preorder_result = self.travelsal_formatter(
+            traversal_result=self.preorder(from_node), ascii_until=ascii_until
+        )
+        formatted_result = "preorder  : "
+        formatted_result += preorder_result
+
+        inorder_result = self.travelsal_formatter(
+            traversal_result=self.inorder(from_node), ascii_until=ascii_until
+        )
+        formatted_result += "\ninorder   : "
+        formatted_result += inorder_result
+
+        postorder_result = self.travelsal_formatter(
+            traversal_result=self.postorder(from_node), ascii_until=ascii_until
+        )
+        formatted_result += "\npostorder : "
+        formatted_result += postorder_result
+
+        return formatted_result
+
     def print_mirrored(self, node, level=0):
         if node is not None:
-            self.print(node.left, level + 1)
+            self.print_mirrored(node.left, level + 1)
             print("     " * level, node)
-            self.print(node.right, level + 1)
+            self.print_mirrored(node.right, level + 1)
 
     def print(self, node, level=0):
         if node is not None:
@@ -419,6 +451,7 @@ nodes, commands = input("Enter Input : ").split("/")
 nodes = nodes.split()
 for node_data in nodes:
     tree.append(node_data)
+print('FIrst look of this plum tree')
 tree.print(tree.root)
 print("********************************************")
 commands = commands.split(",")
@@ -428,18 +461,13 @@ for command in commands:
         tree.append(command[3:])
         tree.print(tree.root)
     elif command[:2] == "CU":
-        result = tree.cut(command[3:])
-        if result is False:
+        RESULT = tree.cut(command[3:])
+        if RESULT is False:
             print("Not thing change")
         tree.print(tree.root)
-    elif command[:2] == "CH":
-        print("preorder  :", end=" ")
-        tree.preorder(tree.root, command[3:])
-        print("\ninorder   :", end=" ")
-        tree.inorder(tree.root, command[3:])
-        print("\npostorder :", end=" ")
-        tree.postorder(tree.root, command[3:])
-        print()
+    elif command[:2] == "CH" and tree.root:
+        FORMATTED = tree.get_traversals(from_node=tree.root, ascii_until=command[3:])
+        print(FORMATTED)
     elif command[:2] == "MI":
         tree.print_mirrored(tree.root)
     print("********************************************")
