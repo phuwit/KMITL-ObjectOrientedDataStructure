@@ -10,7 +10,9 @@ class TreeNode:
     def get_code_points(self):
         code_point = 0
         for magnitude, char in enumerate(self.data[::-1]):
-            code_point += ord(char) * (2 ** (8 * magnitude))
+            # print(char, ord(char) * (1000 ** magnitude))
+            code_point += ord(char) * (1000 ** magnitude)
+        # print(self.data, code_point)
         return code_point
 
 
@@ -18,20 +20,21 @@ class Tree:
     def __init__(self):
         self.root = None
 
-    def search(self, node_data: str):
+    def search(self, _node_data):
         queue = [self.root]
         while len(queue):
             current_node = queue.pop()
             if not current_node:
-                return
-            if current_node.data == node_data:
+                continue
+            if current_node.data == _node_data:
                 return current_node
             queue.append(current_node.left)
             queue.append(current_node.right)
 
-    def append(self, node_data):
-        new_node = TreeNode(node_data)
+    def append(self, _node_data):
+        new_node = TreeNode(_node_data)
         new_node_code_points = new_node.get_code_points()
+        # print('new_node_code_points', new_node_code_points)
 
         if not self.root:
             self.root = new_node
@@ -39,6 +42,15 @@ class Tree:
 
         previous_node = self.root
         current_node = self.root
+
+        # print('data length' , _node_data, len(_node_data))
+        if len(_node_data) >= 2:
+            first_char_node = self.search(_node_data[0])
+            if first_char_node:
+                # print('set first char node to', first_char_node)
+                previous_node = first_char_node
+                current_node = first_char_node
+
         while current_node:
             previous_node = current_node
             if new_node_code_points < current_node.get_code_points():
@@ -51,8 +63,8 @@ class Tree:
         else:
             previous_node.right = new_node
 
-    def cut(self, node_data: str):
-        node = self.search(node_data=node_data)
+    def cut(self, _node_data):
+        node = self.search(_node_data=_node_data)
 
         if not node:
             return False
@@ -94,29 +106,43 @@ class Tree:
         _nodes.append(node)
         return _nodes
 
-    def travelsal_formatter(self, traversal_result, ascii_until):
+    def get_traversal_code_points(self, _node_data):
+        code_point = ''
+        for char in _node_data:
+            code_point += str(ord(char))
+        return code_point
+
+    def traversal_formatter(self, traversal_result, ascii_until):
         formatted = []
         for i in traversal_result:
-            if i.get_code_points() <= ord(ascii_until):
-                formatted.append(str(i.get_code_points()))
+            if len(i.data) == 1:
+                if i.get_code_points() <= ord(ascii_until):
+                    formatted.append(self.get_traversal_code_points(i.data))
+                    continue
+                formatted.append(str(i.data))
+                continue
+
+            if ord(i.data[0]) < ord(ascii_until):
+                formatted.append(self.get_traversal_code_points(i.data))
                 continue
             formatted.append(str(i.data))
+            continue
         return " ".join(formatted)
 
     def get_traversals(self, from_node, ascii_until):
-        preorder_result = self.travelsal_formatter(
+        preorder_result = self.traversal_formatter(
             traversal_result=self.preorder(from_node), ascii_until=ascii_until
         )
         formatted_result = "preorder  : "
         formatted_result += preorder_result
 
-        inorder_result = self.travelsal_formatter(
+        inorder_result = self.traversal_formatter(
             traversal_result=self.inorder(from_node), ascii_until=ascii_until
         )
         formatted_result += "\ninorder   : "
         formatted_result += inorder_result
 
-        postorder_result = self.travelsal_formatter(
+        postorder_result = self.traversal_formatter(
             traversal_result=self.postorder(from_node), ascii_until=ascii_until
         )
         formatted_result += "\npostorder : "
