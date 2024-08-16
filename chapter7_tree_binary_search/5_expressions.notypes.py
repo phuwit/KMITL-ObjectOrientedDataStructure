@@ -1,75 +1,8 @@
-"""
-Chapter : 7 - item : 5 - Expression Tree
-
-ให้น้องๆรับ input เป็น postfix จากนั้นให้แปลงเป็น Expression Tree , Infix และ Prefix  โดย Operator จะมีแค่ + - * /
-
-
-Enter Postfix : ab+cde+**
-Tree :
-                e
-           +
-                d
-      *
-           c
- *
-           b
-      +
-           a
---------------------------------------------------
-Infix : ((a+b)*(c*(d+e)))
-Prefix : *+ab*c+de
-
-
-Enter Postfix : abc*+de*f+g*+
-Tree :
-           g
-      *
-                f
-           +
-                     e
-                *
-                     d
- +
-                c
-           *
-                b
-      +
-           a
---------------------------------------------------
-Infix : ((a+(b*c))+(((d*e)+f)*g))
-Prefix : ++a*bc*+*defg
-
-
-Enter Postfix : ab+c*de-fg+*-
-Tree :
-                g
-           +
-                f
-      *
-                e
-           -
-                d
- -
-           c
-      *
-                b
-           +
-                a
---------------------------------------------------
-Infix : (((a+b)*c)-((d-e)*(f+g)))
-Prefix : -*+abc*-de+fg
-
-"""
-
-
-from typing import List
-
-
 class TreeNode:
-    def __init__(self, data: str):
+    def __init__(self, data):
         self.data = data
-        self.left: TreeNode | None = None
-        self.right: TreeNode | None = None
+        self.left = None
+        self.right = None
 
     def __str__(self):
         return str(self.data)
@@ -81,12 +14,12 @@ class TreeNode:
 
 
 class Tree:
-    def __init__(self, root: TreeNode | None = None):
+    def __init__(self, root=None):
         self.root = None
         if root is not None:
             self.root = root
 
-    def insert(self, node_data: str):
+    def insert(self, node_data):
         new_node = TreeNode(node_data)
 
         if not self.root:
@@ -108,14 +41,14 @@ class Tree:
             previous_node.right = new_node
 
 
-    def print(self, node: TreeNode | None = None, level = 0):
+    def print(self, node=None, level=0):
         if node is not None:
             self.print(node.right, level + 1)
             print('     ' * level, node)
             self.print(node.left, level + 1)
 
-    def preorder(self, node: TreeNode) -> List[TreeNode]:
-        _nodes: List[TreeNode] = []
+    def preorder(self, node):
+        _nodes = []
         _nodes.append(node)
         if node.left:
             _nodes.extend(self.preorder(node=node.left))
@@ -123,8 +56,8 @@ class Tree:
             _nodes.extend(self.preorder(node=node.right))
         return _nodes
 
-    def inorder(self, node: TreeNode):
-        _nodes: List[TreeNode] = []
+    def inorder(self, node):
+        _nodes = []
         if node.left:
             _nodes.extend(self.inorder(node=node.left))
         _nodes.append(node)
@@ -132,8 +65,8 @@ class Tree:
             _nodes.extend(self.inorder(node=node.right))
         return _nodes
 
-    def infix_expressions(self, node: TreeNode):
-        result: str = ''
+    def infix_expressions(self, node):
+        result = ''
         if not node.is_orphan():
             result += '('
 
@@ -147,20 +80,20 @@ class Tree:
             result += ')'
         return result
 
-    def traversal_formatter(self, traversal_result: List[TreeNode], seperator: str):
+    def traversal_formatter(self, traversal_result, seperator):
         formatted = []
         for i in traversal_result:
             formatted.append(str(i.data))
         return seperator.join(formatted)
 
 class Stack:
-    def __init__(self, ls = None):
+    def __init__(self, ls=None):
         if ls is None:
-            self.__stack: List[TreeNode] = []
+            self.__stack = []
         else:
             self.__stack = ls
 
-    def push(self, i: TreeNode):
+    def push(self, i):
         self.__stack.append(i)
 
     def pop(self):
@@ -173,7 +106,7 @@ class Stack:
         return len(self.__stack)
 
 
-def postfix_parser(tokens: List[str]):
+def postfix_parser(tokens):
     stack = Stack()
     expressions_token = "+-*/"
     for token in tokens:
