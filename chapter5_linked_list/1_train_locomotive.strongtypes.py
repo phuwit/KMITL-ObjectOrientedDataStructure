@@ -11,6 +11,7 @@ class SinglyLinkedList[T]:
     def __init__(self):
         self.head: Node | None = None
         self.__iterator_current = None
+        self.__length = 0
 
     def __iter__(self):
         self.__iterator_current = self.head
@@ -26,22 +27,17 @@ class SinglyLinkedList[T]:
         return previous
 
     def __len__(self) -> int:
-        current_node = self.head
-        if not current_node:
-            return 0
-        length = 1
-        while current_node.next:
-            current_node = current_node.next
-            length += 1
-            continue
-        return length
+        return self.__length
 
-    def __getitem__(self, index) -> Node[T] | None:
+    def __getitem__(self, index) -> Node:
+        if index >= len(self):
+            raise IndexError
         current_index = 0
         for item in self:
             if current_index >= index:
                 return item
             current_index += 1
+        raise IndexError
 
     def __str__(self) -> str:
         items = list(str(i) for i in self)
@@ -51,25 +47,18 @@ class SinglyLinkedList[T]:
         new_node = Node(item=item, next_node=None)
         if not self.head:
             self.head = new_node
+            self.__length += 1
             return new_node
-
-        current_node = self.head
 
         if index:
-            current_index = 0
-            while current_node.next and index >= current_index :
-                current_node = current_node.next
-                current_index += 1
-                continue
+            current_node = self[index]
             next_node = current_node.next
-            current_node.next = new_node
             new_node.next = next_node
-            return new_node
+        else:
+            current_node = self[len(self) - 1]
 
-        while current_node.next:
-            current_node = current_node.next
-            continue
         current_node.next = new_node
+        self.__length += 1
         return new_node
 
 
