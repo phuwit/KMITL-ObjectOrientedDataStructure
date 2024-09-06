@@ -134,6 +134,7 @@ class Tree:
 
     def infix_expressions(self, node: TreeNode):
         result: str = ''
+
         if not node.is_orphan():
             result += '('
 
@@ -145,6 +146,7 @@ class Tree:
 
         if not node.is_orphan():
             result += ')'
+        print(result)
         return result
 
     def traversal_formatter(self, traversal_result: List[TreeNode], seperator: str):
