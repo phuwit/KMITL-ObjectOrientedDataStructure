@@ -51,7 +51,7 @@ class AVLTree[T]:
             AVLTree.print_subtree(self, node.left, level + 1)
 
     def rotate_left(self, node: AVLNode) -> AVLNode:
-        print(f'rotating left {node}')
+        # print(f'rotating left {node}')
         child = node.right
         if not child:
             raise AttributeError
@@ -65,7 +65,7 @@ class AVLTree[T]:
         return child
 
     def rotate_right(self, node: AVLNode) -> AVLNode:
-        print(f'rotating right {node}')
+        # print(f'rotating right {node}')
         child = node.left
         if not child:
             raise AttributeError
@@ -92,7 +92,7 @@ class AVLTree[T]:
             # Right Left imbalance -> Rotate Right-Left
             if node.right and node.right.left and node.right.get_balance_factor() < 0:
                 node.right = self.rotate_right(node.right)
-                node = self.rotate_left(node.right)
+                node = self.rotate_left(node)
                 return node
 
         # AVL Violation on left child
@@ -105,16 +105,18 @@ class AVLTree[T]:
             # Left Right imbalance -> Rotate Left-Right
             if node.left and node.left.right and node.left.get_balance_factor() > 0:
                 node.left = self.rotate_left(node.left)
-                node = self.rotate_right(node.left)
+                node = self.rotate_right(node)
                 return node
 
     def rebalance_child(self, node: AVLNode):
         if node.right and not node.right.is_balanced():
             node.right = self.rebalance(node=node.right)
+            node.update_height()
             return node
 
         if node.left and not node.left.is_balanced():
             node.left = self.rebalance(node=node.left)
+            node.update_height()
             return node
 
     def rebalance_root(self):
@@ -122,6 +124,7 @@ class AVLTree[T]:
             return
         if not self.root.is_balanced():
             self.root = self.rebalance(self.root)
+            # print(f'rebalancing root with {self.root}')
 
     def _recursive_insert(self, current_node: AVLNode, to_insert: AVLNode):
         if to_insert.data >= current_node.data:
@@ -143,11 +146,11 @@ class AVLTree[T]:
 
         rebalance_result = self.rebalance_child(node=current_node)
         if rebalance_result:
-            print(f'replacing {current_node} with {rebalance_result}')
+            # print(f'replacing {current_node} with {rebalance_result}')
             current_node = rebalance_result
 
     def insert(self, data: "T"):
-        print(f'inserting {data}')
+        # print(f'inserting {data}')
         new_node: AVLNode = AVLNode(data=data)
         if self.root is None:
             self.root = new_node
@@ -157,29 +160,29 @@ class AVLTree[T]:
 
 
 
+tree: AVLTree = AVLTree()
+input_string = input("Enter Input : ").split(",")
+for command in input_string:
+    # print(command)
+    if command[:2] == "AD":
+        tree.insert(int(command[3:]))
+    elif command[:2] == "PR":
+        tree.print()
+    elif command[:2] == "PO":
+        if tree.root:
+            postorder_result = " ".join(map(str, tree.postorder(tree.root)))
+            print(f"AVLTree post-order : {postorder_result}")
+        else:
+            print("AVLTree post-order : ")
+    # tree.print()
+    # print('===========================')
+
+
 # tree: AVLTree = AVLTree()
-# input_string = input("Enter Input : ").split(",")
-# for command in input_string:
-#     print(command)
-#     if command[:2] == "AD":
-#         tree.insert(int(command[3:]))
-#     elif command[:2] == "PR":
-#         tree.print()
-#     elif command[:2] == "PO":
-#         if tree.root:
-#             postorder_result = " ".join(map(str, tree.postorder(tree.root)))
-#             print(f"AVLTree post-order : {postorder_result}")
-#         else:
-#             print("AVLTree post-order : ")
+# datas = [33,13,53,11,21,61,8,9]
+
+# for data in datas:
+#     tree.insert(int(data))
+
 #     tree.print()
 #     print('===========================')
-
-
-tree: AVLTree = AVLTree()
-datas = [33,13,53,11,21,61,8,9]
-
-for data in datas:
-    tree.insert(int(data))
-
-    tree.print()
-    print('===========================')

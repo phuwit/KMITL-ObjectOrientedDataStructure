@@ -55,6 +55,10 @@ class AVLTree:
 
         node.right = child.left
         child.left = node
+
+        node.update_height()
+        child.update_height()
+
         return child
 
     def rotate_right(self, node):
@@ -65,6 +69,10 @@ class AVLTree:
 
         node.left = child.right
         child.right = node
+
+        node.update_height()
+        child.update_height()
+
         return child
 
     def rebalance(self, node):
@@ -74,36 +82,38 @@ class AVLTree:
         # AVL Violation on right child
         if right_height > left_height:
             # Right Right imbalance -> Rotate Left
-            if node.get_balance_factor() >= 0 and node.right:
+            if node.right and node.right.get_balance_factor() >= 0 :
                 node = self.rotate_left(node)
                 return node
 
             # Right Left imbalance -> Rotate Right-Left
-            if node.get_balance_factor() < 0 and node.right and node.right.left:
+            if node.right and node.right.left and node.right.get_balance_factor() < 0:
                 node.right = self.rotate_right(node.right)
-                node = self.rotate_left(node.right)
+                node = self.rotate_left(node)
                 return node
 
         # AVL Violation on left child
         else:
             # Left Left imbalance -> Rotate Right
-            if node.get_balance_factor() <= 0 and node.left:
+            if node.left and node.left.get_balance_factor() <= 0:
                 node = self.rotate_right(node)
                 return node
 
             # Left Right imbalance -> Rotate Left-Right
-            if node.get_balance_factor() > 0 and node.left and node.left.right:
+            if node.left and node.left.right and node.left.get_balance_factor() > 0:
                 node.left = self.rotate_left(node.left)
-                node = self.rotate_right(node.left)
+                node = self.rotate_right(node)
                 return node
 
     def rebalance_child(self, node):
         if node.right and not node.right.is_balanced():
             node.right = self.rebalance(node=node.right)
+            node.update_height()
             return node
 
         if node.left and not node.left.is_balanced():
             node.left = self.rebalance(node=node.left)
+            node.update_height()
             return node
 
     def rebalance_root(self):
@@ -111,6 +121,7 @@ class AVLTree:
             return
         if not self.root.is_balanced():
             self.root = self.rebalance(self.root)
+            # print(f'rebalancing root with {self.root}')
 
     def _recursive_insert(self, current_node, to_insert):
         if to_insert.data >= current_node.data:
@@ -145,6 +156,7 @@ class AVLTree:
         self.rebalance_root()
 
 
+
 tree = AVLTree()
 input_string = input("Enter Input : ").split(",")
 for command in input_string:
@@ -161,3 +173,13 @@ for command in input_string:
             print("AVLTree post-order : ")
     # tree.print()
     # print('===========================')
+
+
+# tree = AVLTree()
+# datas = [33,13,53,11,21,61,8,9]
+
+# for data in datas:
+#     tree.insert(int(data))
+
+#     tree.print()
+#     print('===========================')
