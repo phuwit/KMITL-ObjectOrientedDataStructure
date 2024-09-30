@@ -7,14 +7,14 @@ def binary_search(
     middle_value = sorted_list[middle_index]
     if middle_value == target:
         return True
-    if middle_value > target:
+    if middle_value < target:
         return binary_search(
             range_start=middle_index + 1,
             range_end=range_end,
             sorted_list=sorted_list,
             target=target,
         )
-    if middle_value < target:
+    if middle_value > target:
         return binary_search(
             range_start=range_start,
             range_end=middle_index - 1,
