@@ -1,3 +1,32 @@
+'''
+ให้นักศึกษาสร้าง AVL Tree แล้วแสดงผล Tree ในแต่ละรอบหลังจาก insert และตรวจสอบว่า Balance หรือเปล่าถ้าไม่ Balance ปรับให้เรียบร้อยและแสดงรอบแบบการปรับ Tree ว่าเป็นการ Rotation แบบไหน
+
+
+ตัวอย่างการทำงาน
+
+ *** AVL Tree Insert Element ***
+Enter Input : 1 2 3 4
+insert : 1
+ 1
+====================
+insert : 2
+      2
+ 1
+====================
+insert : 3
+Left Left Rotation
+      3
+ 2
+      1
+====================
+insert : 4
+           4
+      3
+ 2
+      1
+====================
+'''
+
 class AVLNode:
     def __init__(self, data):
         self.data = data

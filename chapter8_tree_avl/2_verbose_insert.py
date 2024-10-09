@@ -1,3 +1,39 @@
+'''
+ให้น้องๆสร้าง AVL Tree ด้วย Class โดยผลลัพธ์ให้แสดงเป็น Tree ในแต่ละรอบหลังจาก Insert ให้ตรวจสอบว่า balance หรือยัง หากไม่ให้ ปรับ Balance ให้เรียบร้อยแล้วและแสดงผล
+
+** ถ้าสงสัยสามารถดู visualization ของ AVL ได้ที่ website นี้ : https://www.cs.usfca.edu/~galles/visualization/AVLtree.html
+
+#code เป็นเพียงตัวอย่างเท่านั้นสามารถเขียนขึ้นเองโดยไม่ต้องอ้างอิงจาก code นี้ก็ได้
+class TreeNode(object):
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+        self.height = 1
+
+    def __str__(self):
+        return str(self.val)
+
+class AVL_Tree(object):
+    #code here
+
+def printTree90(node, level = 0):
+    if node != None:
+        printTree90(node.right, level + 1)
+        print('     ' * level, node)
+        printTree90(node.left, level + 1)
+
+myTree = AVL_Tree()
+root = None
+
+data = input("Enter Input : ").split()
+for e in data:
+    print("insert :",e)
+    root = myTree.insert(root, e)
+    printTree90(root)
+    print("===============")
+'''
+
 class AVLNode:
     def __init__(self, data):
         self.data = data

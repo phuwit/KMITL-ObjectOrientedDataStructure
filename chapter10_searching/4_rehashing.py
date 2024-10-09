@@ -1,3 +1,18 @@
+'''
+ให้น้องๆเขียนการทำ Rehashing ด้วยเงื่อนไขดังนี้
+1. Table เต็มถึงระดับที่กำหนด ( Threshold (%) )
+2. เมื่อเกิดการ Collision ถึงจำนวนที่กำหนด
+
+หากเกิดการ Rehashing ให้ทำการขยาย Table เป็นค่า prime ถัดไปที่มากกว่าเดิม 2 เท่า เช่น หาก Table ตอนแรกมีขนาด 4 และเกิดการ Rehashing  ตัว Table ใหม่จะมีขนาดเป็น 11 เนื่องจาก 2 เท่าของ 4 คือ 8  และค่า prime ที่มากกว่า 8 และใกล้ 8 มากที่สุดคือ 11
+
+การ Hash หากเกิดการ Collision ให้ใช้ Quadratic Probing ในการแก้ปัญหา Collision
+
+อธิบาย Input
+แบ่ง Data เป็น 2 ชุดด้วย /
+    -   ด้านซ้ายหมายถึง ขนาดของ Table , MaxCollision และ Threshold (สูงสุด 100 %) ตามลำดับ
+    -   ด้านขวาหมายถึง Data n ชุด โดย Data แต่ละชุดแบ่งด้วย spacebar และ Data แต่ละตัวเป็นจำนวนเต็มศูนย์หรือบวกเท่านั้น และไม่มี Data ซ้ำกันเด็ดขาด
+'''
+
 def sieve_of_eratosthenes(int_list):
     primes = []
     list_max = max(int_list)
@@ -25,6 +40,7 @@ def get_next_prime(number: int):
     while not is_prime(number):
         number += 1
     return number
+
 class Data:
     def __init__(self, _key, _value):
         self.key: str = _key
@@ -78,7 +94,7 @@ class Table:
                 self.insert(_data)
 
     def get_data_hash(self, data: Data):
-        return int(data.key) % len(self)
+        return int(data.value) % len(self)
 
     def get_none_count(self):
         return self.table.count(None)
