@@ -1,3 +1,29 @@
+'''
+Chapter : 11 - item : 5 - graph
+
+ส่งมาแล้ว 2 ครั้ง
+
+กำหนดกราฟรูปหนึ่งดังนี้
+
+graph = { 'A':{'B':1,'C':2},'B':{'D':12,'A':1}, 'C':{'D':9,'F':3,'A':2}, 'D':{'C':9,'E':7,'G':1},\
+         'E':{'G':5,'D':7}, 'F':{'G':4}, 'G':{'D':1,'E':5,'F':4} }
+
+
+ให้เขียนโปรแกรมเพื่อหา shortest path โดยใส่ข้อมูล เป็น vertex เริ่มต้น และ vertex สุดท้าย
+
+ *** Dijkstra's shortest path ***
+Enter start and target vertex : A D
+Shortest distance is 10
+And the path is ['A', 'C', 'F', 'G', 'D']
+
+
+ *** Dijkstra's shortest path ***
+Enter start and target vertex : B G
+Shortest distance is 10
+And the path is ['B', 'A', 'C', 'F', 'G']
+
+'''
+
 # def generate_dijkstra(nodes: dict[str, dict[str, int]], start: str):
 def generate_dijkstra(nodes, start):
     dijkstra: dict[str, tuple[int, str]] = {start: (0, start)}
