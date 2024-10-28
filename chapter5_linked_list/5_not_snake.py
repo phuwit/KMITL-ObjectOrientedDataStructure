@@ -266,8 +266,8 @@ class Snake:
         if node1.data == node2.data:
             return
 
-        prev1, next1 = node1.previous, node1.next
-        prev2, next2 = node2.previous, node2.next
+        prev1, _ = node1.previous, node1.next
+        _, next2 = node2.previous, node2.next
 
         node1.previous = node2
         node1.next = next2

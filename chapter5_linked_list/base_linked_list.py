@@ -3,7 +3,7 @@ basis for this chapter haha yes emoji freezing
 '''
 
 
-from typing import Any, List, Union
+from typing import Any, Union
 
 
 class SinglyLinkedNode:
@@ -108,7 +108,6 @@ class SinglyLinkedList:
                     break
                 previous_node = previous_node.next
 
-            previous_node.
 
     def append_head(self, item):
         old_node = self.__head

@@ -28,7 +28,7 @@ class AVLTree:
     def __init__(self) -> None:
         self.root = None
 
-    def get_vertical_image(self, node):
+    def get_vertical_image(self, node: AVLNode | None) -> "tuple[list, int, int, int]":
         """
         return
         - tree image: list[str]
@@ -38,12 +38,12 @@ class AVLTree:
         """
         if node is None:
             return [], 0, 0, 0
-        lt, lf, lv, lb = self.get_vertical_image(node.left)
-        rt, rf, rv, rb = self.get_vertical_image(node.right)
+        left_subtree, lf, lv, lb = self.get_vertical_image(node.left)
+        right_subtree, rf, rv, rb = self.get_vertical_image(node.right)
         data = str(node.data)
-        if not lt and not rt:
+        if not left_subtree and not right_subtree:
             return [data], 0, len(data), 0
-        add_left, add_right = int(bool(lt)), int(bool(rt))
+        add_left, add_right = int(bool(left_subtree)), int(bool(right_subtree))
         line = (
             (" " * (lf + lv) + "/" + " " * (lb)) * add_left
             + " " * len(data)
@@ -57,12 +57,12 @@ class AVLTree:
             + " " * (rv + rb + add_right),
             line,
         ]
-        if len(lt) > len(rt):
-            rt.extend([" " * (rf + rv + rb)] * (len(lt) - len(rt)))
-        elif len(lt) < len(rt):
-            lt.extend([" " * (lf + lv + lb)] * (len(rt) - len(lt)))
-        for l, r in zip(lt, rt):
-            out.append(l + " " * (len(data) + add_left + add_right) + r)
+        if len(left_subtree) > len(right_subtree):
+            right_subtree.extend([" " * (rf + rv + rb)] * (len(left_subtree) - len(right_subtree)))
+        elif len(left_subtree) < len(right_subtree):
+            left_subtree.extend([" " * (lf + lv + lb)] * (len(right_subtree) - len(left_subtree)))
+        for left_node, right_node in zip(left_subtree, right_subtree):
+            out.append(left_node + " " * (len(data) + add_left + add_right) + right_node)
         return out, (lf + lv + lb + add_left), len(data), (rf + rv + rb + add_right)
 
     def inorder(self, node):

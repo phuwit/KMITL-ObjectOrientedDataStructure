@@ -86,7 +86,6 @@ class Shipment:
         self.boxes_per_pallet = boxes_per_pallet
 
     def can_pack(self, max_capacity: int):
-        pallet = Pallet()
         accumulated_weight = 0
         box_used = 1
 

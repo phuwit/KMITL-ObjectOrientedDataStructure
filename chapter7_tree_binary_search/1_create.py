@@ -102,7 +102,7 @@ class Tree:
             previous_node.right = new_node
 
     def printTree(self, node, level=0):
-        if node != None:
+        if node is not None:
             self.printTree(node.right, level + 1)
             print("     " * level, node)
             self.printTree(node.left, level + 1)
