@@ -51,7 +51,7 @@ def generate_dijkstra(nodes, start):
                 visit_queue.add(destination)
 
             accumulated_weight += edge_weight
-            if not destination in dijkstra:
+            if destination not in dijkstra:
                 dijkstra[destination] = (accumulated_weight, source)
                 continue
 

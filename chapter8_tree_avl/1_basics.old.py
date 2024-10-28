@@ -141,7 +141,7 @@ class AVLTree:
         print()
 
     def _printTree(self, node, level=0):
-        if not node is None:
+        if node is not None:
             AVLTree._printTree(self, node.right, level + 1)
             print("     " * level, node.data)
             AVLTree._printTree(self, node.left, level + 1)

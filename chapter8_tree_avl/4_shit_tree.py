@@ -91,7 +91,6 @@ print(*tree_image[0], sep='\n')
 """
 
 from __future__ import annotations
-from logging import root
 from typing import List
 
 

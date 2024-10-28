@@ -128,8 +128,7 @@ __#O##
 6 4 F__###,__####,_#####,__#O##
 """
 
-import queue
-from typing import List, Any
+from typing import List
 
 START_SYMBOL = "F"
 EXIT_SYMBOL = "O"

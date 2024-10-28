@@ -174,7 +174,7 @@ class AVLTree[T]:
         print()
 
     def print_subtree(self, node, level=0):
-        if not node is None:
+        if node is not None:
             AVLTree.print_subtree(self, node.right, level + 1)
             print("     " * level, node.data)
             AVLTree.print_subtree(self, node.left, level + 1)

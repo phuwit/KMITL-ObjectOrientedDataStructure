@@ -3,7 +3,7 @@
 # จงเขียนฟังก์ชันเพื่อหาผลรวมของ 3 พจน์ใดๆใน Array ที่มีผลรวมเท่ากับ 0 สำหรับ Array ที่มีข้อมูลข้างในเป็นจำนวนจริง ***Array ต้องมีความยาวตั้งแต่ 3 จำนวนขึ้นไป***
 
 
-from typing import List, Set, Tuple
+from typing import Set, Tuple
 
 
 input_string = input("Enter Your List : ")

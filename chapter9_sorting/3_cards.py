@@ -111,7 +111,7 @@ for card_string in input_card_string_deduped:
     try:
         card = Card(suit=card_string[0], rank=card_string[1:], value_mode=sort_mode)
         cards.append(card)
-    except Exception as exc:
+    except Exception:
         print(f"Error: {card_string} is an invalid card")
 
 
