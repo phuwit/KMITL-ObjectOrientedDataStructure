@@ -1,4 +1,4 @@
-'''
+"""
 Chapter : 5 - item : 3 - Intersection and Swap merge
 
 จากการหา portal ในคราวก่อน น้องๆมอง "เขียนสวยๆกะทัดรัด ไม่งั้นจะส่งกลับไปเขียนใหม่" เป็นแค่ประโยคขู่เปล่าๆ ดังนั้นในข้อนี้จึงไม่มีข้อบังคับ แค่แลกมากับความยากนิดหน่อย ใช้ความขี้โกงของ python ให้เต็มที่ พี่ซันฟงไม่ได้ติดในฝัน ไม่มีนิยายให้อ่าน แต่รอบนี้พี่ต้องการโปรแกรมที่มีรายละเอียดดังนี้
@@ -81,18 +81,18 @@ Delete intersection then swap merge:
 Enter edges: 8>8
 No intersection
 
-'''
+"""
 
 from typing import List, Tuple
 from base_linked_list import SinglyLinkedList, SinglyLinkedNode
 
-commands = input('Enter edges: ').split(',')
+commands = input("Enter edges: ").split(",")
 
 nodes_details: List[Tuple[int, int]] = []
 
 for command in commands:
-    node = (int(node) for node in command.split('>'))
-    nodes_details.append(tuple(node)) # type: ignore
+    node = (int(node) for node in command.split(">"))
+    nodes_details.append(tuple(node))  # type: ignore
 
 print(nodes_details)
 
@@ -135,9 +135,13 @@ while len(sub_linked_lists) > 1:
                 pre_junction.next = testing_tail_linked_list.head
             junction = sub.search(sub.peek(i))
             sub.pop(i)
-            print(f'Node({i}, size={testing_tail_linked_list.size() + 1})')
-            if isinstance(junction, SinglyLinkedNode) and isinstance(junction.next, SinglyLinkedNode):
-                next_node = testing_tail_linked_list.search(testing_tail_linked_list.peek())
+            print(f"Node({i}, size={testing_tail_linked_list.size() + 1})")
+            if isinstance(junction, SinglyLinkedNode) and isinstance(
+                junction.next, SinglyLinkedNode
+            ):
+                next_node = testing_tail_linked_list.search(
+                    testing_tail_linked_list.peek()
+                )
                 junction.next.next = next_node
             tail_search_index = -1
             sub_linked_lists.pop(tail_search_index)
@@ -149,8 +153,6 @@ while len(sub_linked_lists) > 1:
         continue
     else:
         tail_search_index += 1
-
-
 
 
 print([str(i) for i in sub_linked_lists])

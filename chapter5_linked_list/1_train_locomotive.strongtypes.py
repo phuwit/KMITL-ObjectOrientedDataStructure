@@ -1,5 +1,5 @@
 class Node[T]:
-    def __init__(self, item: 'T', next_node: 'Node | None'):
+    def __init__(self, item: "T", next_node: "Node | None"):
         self.item = item
         self.next = next_node
 
@@ -41,9 +41,9 @@ class SinglyLinkedList[T]:
 
     def __str__(self) -> str:
         items = list(str(i) for i in self)
-        return ' <- '.join(items)
+        return " <- ".join(items)
 
-    def append(self, item: 'T', index: None | int = None):
+    def append(self, item: "T", index: None | int = None):
         new_node = Node(item=item, next_node=None)
         if not self.head:
             self.head = new_node
@@ -60,7 +60,6 @@ class SinglyLinkedList[T]:
         current_node.next = new_node
         self.__length += 1
         return new_node
-
 
 
 print(" *** Locomotive ***")

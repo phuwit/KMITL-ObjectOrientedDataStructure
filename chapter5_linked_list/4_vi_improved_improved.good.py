@@ -4,6 +4,7 @@ class DoublyLinkedNode:
         self.previous = None
         self.next = None
 
+
 class Vim:
     def __init__(self):
         cursor_node = DoublyLinkedNode("|")
@@ -102,6 +103,7 @@ class Vim:
             linked_list_values.append(current_node.value)
             current_node = current_node.next
         return " ".join(linked_list_values)
+
 
 user_input = input("Enter Input : ").split(",")
 commands_list = []

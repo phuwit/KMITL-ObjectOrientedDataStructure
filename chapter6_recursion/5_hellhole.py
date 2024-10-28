@@ -1,4 +1,4 @@
-'''
+"""
 Chapter : 6 - item : 5 - ซ้อมตกนรก
 ต้นไม้แห่งกามภูมิ หรือ งิ้ว
 จากหนังสือไตรภูมิกถาได้บรรยายถึงต้นไม้แห่งกามภูมิแห่งนรกภูมิไว้ว่า
@@ -6,7 +6,7 @@ Chapter : 6 - item : 5 - ซ้อมตกนรก
 หากท่านที่ได้โจทย์นี้ ถือว่าท่านยังมีบุญ ก่อนที่ยมทูตจะพาตัวนักศึกษาไปลงนรก ยมทูตได้ทำโจทย์นี้ออกมา เพื่อให้คนที่มีบุญสัมพันธ์ได้รอด และช่วยให้ผ่านการทนทุกข์ทรมานในขุมนรกได้เร็วขึ้น นั้นก็คือการให้นักศึกษาฝึกซ้อมซ้อมปีนต้นงิ้วเอาไว้นั้นเอง ซึ่งหากปีนถึงยอดต้นงิ้วก็ถือว่ารอดจากขุมนรกนี้ได้สำเร็จ ทำให้นักศึกษารำลึกเอาไว้ว่า หากเจอในสถานการณ์จริงจะได้ปีนได้เร็ว และหลุดพ้นจากขุมนรกแห่งนี้ได้เขาก่อนไครนั้นเอง เพราะโจทย์ของยมทูตข้อนี้นั้นเอง
 ลักษณะการปีน
     โดยต้นงิ้วที่นักศึกษาจะปีน จะถูกแบ่งเป็นข้อๆ โดยแต่ละข้อจะมีหนามให้จับและปีนขึ้นไป
-	(โดยให้ถือว่าข้อเเรกของต้นไม้อยู่เหนือหัวของนักศึกษาที่จะปีน และถือว่าถ้าถึงข้อสุดท้ายถือว่าปีนผ่านสำเร็จ)
+        (โดยให้ถือว่าข้อเเรกของต้นไม้อยู่เหนือหัวของนักศึกษาที่จะปีน และถือว่าถ้าถึงข้อสุดท้ายถือว่าปีนผ่านสำเร็จ)
     แต่ต้นงิ้วก็ไม่ใช่ง่ายที่จะปีนขึ้นไปให้สำเร็จ เพราะจะมีบางข้อที่จะมีหนามที่ยาวจนเกินไป ทำให้ยากที่จะปีนขึ้น ทำให้นักศึกษาจะต้องเอื้อมมือไปจับหนามในข้อต่อๆไป ซึ่งมนุษย์เราจะเอื้อมไปจับข้อของต้นไม้เหนือหัวเราได้สูงสุดแค่ 3 ข้อ (1, 2 และ 3 ข้อเท่านั้น)
     เช่นเดียวกันนี้เป็นแค่การฝึก เพราะฉนั้นมนุษย์ย่อมมีอาการเหนื่อยได้หากปีนขึ้นต้นไม้ และจะยิ่งเหนื่อยเพิ่มมากขึ้นหาก ต้องเอื้อมไปจับข้อต้นไม้ที่ยิ่งอยู่สูงขึ้นไป ซึ่งมนุษย์ก็มีขีดจำกัดเช่นกัน ทำให้หากพลังงานหมดก่อนจะถือว่าปีนต้นไม้นั้นไม่สำเร็จนั้นเอง
 สิ่งที่นักศึกษาต้องทำ
@@ -146,22 +146,22 @@ Max Tiredness: 500.0
 Tiredness Values: {1: 200.0, 2: 400.0, 3: 0}
 --------------------------------------------------
 The ways to escape is/are 3 ways
-'''
+"""
 
 from typing import Dict, List
 
 MAX_REACH = 3
 
-settings = input('Creating a simulated hell scenario: ').split('/')
+settings = input("Creating a simulated hell scenario: ").split("/")
 
 height = int(settings.pop(0))
-problematic_thorns = settings.pop(0).split(',')
+problematic_thorns = settings.pop(0).split(",")
 max_energy = float(settings.pop(0))
 tiredness: Dict[int, int | float] = {1: 0, 2: 0, 3: 0}
-tiredness_raw = settings.pop(0).split(',')
+tiredness_raw = settings.pop(0).split(",")
 if len(tiredness_raw) > 1:
     for i, value in enumerate(tiredness_raw):
-        tiredness[i+1] = float(value)
+        tiredness[i + 1] = float(value)
         continue
 elif tiredness_raw != 0:
     tiredness_all = float(tiredness_raw.pop())
@@ -169,11 +169,13 @@ elif tiredness_raw != 0:
 
 
 print(
-f'''Height: {height}
+    f"""Height: {height}
 thorn At: {problematic_thorns}
 Max Tiredness: {max_energy}
-Tiredness Values: {tiredness}''')
+Tiredness Values: {tiredness}"""
+)
 problematic_thorns = [int(n) for n in problematic_thorns]
+
 
 def get_paths(current_level: int, used_energy: float):
     if used_energy > max_energy:
@@ -193,15 +195,17 @@ def get_paths(current_level: int, used_energy: float):
     paths: List[bool] = []
     for step_size in range(1, MAX_REACH + 1):
         # print(f'level={current_level}, stepsize={step_size}')
-        paths.extend(get_paths(
-            current_level=(current_level + step_size),
-            used_energy=(used_energy + tiredness[step_size])
-            ))
+        paths.extend(
+            get_paths(
+                current_level=(current_level + step_size),
+                used_energy=(used_energy + tiredness[step_size]),
+            )
+        )
 
     return paths
 
 
 valid_paths = sum(1 for i in get_paths(current_level=0, used_energy=0) if i is True)
 
-print(f'''--------------------------------------------------
-The ways to escape is/are {valid_paths} ways''')
+print(f"""--------------------------------------------------
+The ways to escape is/are {valid_paths} ways""")

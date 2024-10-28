@@ -16,4 +16,5 @@ class Solution:
             return True
         return False
 
-print(Solution().isValid('()'))
+
+print(Solution().isValid("()"))

@@ -1,4 +1,4 @@
-'''
+"""
 Chapter : 11 - item : 3 - shortest path
 
 ส่งมาแล้ว 18 ครั้ง
@@ -6,13 +6,13 @@ Chapter : 11 - item : 3 - shortest path
 รับ input เป็น list คู่อันดับ เพื่อนำไปสร้าง Directed Graph แบบมี weight จากนั้นให้แสดงผล shortest path โดยใช้ Dijkstra’s Shortest Path Algorithm
 
 เช่น A 3 B,B 1 C/A B,A C = สร้างกราฟที่ A ไปหา B ได้โดยมีweight=3 และ B ไปหา C ได้โดยมีweight=1 / แสดง shortest path จากA>BและA>C)
-'''
+"""
 # weighted_nodes: dict[str, dict[str, int]] = {}
 
 weighted_nodes = {}
 
-edges_raw, queries_raw = input('Enter : ').split('/')
-for edge_raw in edges_raw.split(','):
+edges_raw, queries_raw = input("Enter : ").split("/")
+for edge_raw in edges_raw.split(","):
     from_node, weight, to_node = edge_raw.split()
     weight = int(weight)
 
@@ -25,6 +25,7 @@ for edge_raw in edges_raw.split(','):
 
 sorted_weighted_nodes = dict(sorted(weighted_nodes.items()))
 smallest_vertex = min(weighted_nodes.items())[0]
+
 
 # def generate_dijkstra(nodes: dict[str, dict[str, int]], start: str):
 def generate_dijkstra(nodes, start):
@@ -62,13 +63,14 @@ def generate_dijkstra(nodes, start):
 
     return dijkstra
 
+
 # def get_path(paths: dict[str, tuple[int, str]], destination: str):
 def get_path(paths, destination):
     history = []
     current_node = destination
     while current_node:
         try:
-            path_weight, next_node  = paths[current_node]
+            path_weight, next_node = paths[current_node]
         except KeyError:
             break
         history.append(current_node)
@@ -78,6 +80,7 @@ def get_path(paths, destination):
         # print(current_node, cost)
         continue
     return history
+
 
 # # def find_path(paths: dict[str, tuple[int, str]], source: str, destination: str):
 # def find_path(paths, source, destination):
@@ -98,7 +101,7 @@ def get_path(paths, destination):
 
 # print(dijkstra_paths)
 
-for query_raw in queries_raw.split(','):
+for query_raw in queries_raw.split(","):
     from_node, to_node = query_raw.split()
 
     # try:
@@ -111,8 +114,8 @@ for query_raw in queries_raw.split(','):
     dijkstra_paths = generate_dijkstra(weighted_nodes, from_node)
     path = get_path(dijkstra_paths, to_node)
     if not path:
-        print(f'Not have path : {from_node} to {to_node}')
+        print(f"Not have path : {from_node} to {to_node}")
         continue
 
-    formatted_path = '->'.join(path[::-1])
-    print(f'{from_node} to {to_node} : {formatted_path}')
+    formatted_path = "->".join(path[::-1])
+    print(f"{from_node} to {to_node} : {formatted_path}")

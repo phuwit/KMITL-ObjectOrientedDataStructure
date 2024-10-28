@@ -1,4 +1,4 @@
-'''
+"""
 Chapter : 4 - item : 4 - Canteen
 
 โรงอาหารของบริษัทแห่งหนึ่ง จะมีเจ้าหน้าที่คอยจัดแถวสำหรับการซื้ออาหาร โดยจะมีหลักการคือจะดูจากแผนกของพนักงานแต่ละคนว่าอยู่แผนกไหน ถ้าหากในแถวที่ต่ออยู่มีแผนกนั้น จะนำพนักงานคนนั้นแทรกไปด้านหลังของแผนกเดียวกัน ตัวอย่างเช่น
@@ -64,7 +64,7 @@ Empty
 303
 Empty
 
-'''
+"""
 
 
 class Queue:
@@ -90,29 +90,31 @@ class Queue:
         return self.__queue.__str__()
 
 
-all_employess_data, queue_instruction_data = input('Enter Input : ').split('/')
+all_employess_data, queue_instruction_data = input("Enter Input : ").split("/")
 
-employees_data = all_employess_data.split(',')
-employees = list(map(lambda employee_data: employee_data.split(' '), employees_data))
+employees_data = all_employess_data.split(",")
+employees = list(map(lambda employee_data: employee_data.split(" "), employees_data))
 
-commands = queue_instruction_data.split(',')
+commands = queue_instruction_data.split(",")
 
 queue = Queue([])
 
 for command in commands:
-    if command[0] == 'D':
+    if command[0] == "D":
         if queue.length():
             print(queue.dequeue()[1])
             continue
-        print('Empty')
-    elif command[0] == 'E':
-        employee_id = command.split(' ')[1]
+        print("Empty")
+    elif command[0] == "E":
+        employee_id = command.split(" ")[1]
         for source_department, source_employee in employees:
             if source_employee == employee_id:
                 for i, queued_employee in enumerate(queue.get_queue()[::-1]):
                     if queued_employee[0] == source_department:
                         modified_queue = queue.get_queue()
-                        modified_queue.insert(queue.length() - i, (source_department, source_employee))
+                        modified_queue.insert(
+                            queue.length() - i, (source_department, source_employee)
+                        )
                         queue.set_queue(modified_queue)
                         break
                 else:

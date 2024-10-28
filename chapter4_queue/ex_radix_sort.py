@@ -1,5 +1,6 @@
 from typing import List
 
+
 class Queue:
     def __init__(self, items: List) -> None:
         self.__list = items
@@ -29,19 +30,16 @@ class RadixSort:
                 max = item
         return max
 
-
     def get_number_of_digits(self, number: int):
         digit = 1
-        while number // (10 ** digit) > 0:
+        while number // (10**digit) > 0:
             digit += 1
         return digit
-
 
     def get_nth_digit(self, number: int, digit: int):
         nth_digit = number // (10 ** (digit - 1))
         nth_digit %= 10
         return nth_digit
-
 
     def sort(self, items: List[int]) -> List[int]:
         max = self.get_max_item_from_list(items)

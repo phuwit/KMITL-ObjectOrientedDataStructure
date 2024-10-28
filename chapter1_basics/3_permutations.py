@@ -54,20 +54,35 @@ def get_possible_insertions(number: int, target_list: List[int]):
 
 #     return permutations
 
+
 def permute(
     original_list: List[int], active_permutation: List[int], current_index: int = 0
 ):
     permutations: List[List[int]] = []
     if len(active_permutation) == 0:
-        permutations.extend(permute(original_list=original_list, active_permutation=[original_list[current_index]], current_index=current_index + 1))
+        permutations.extend(
+            permute(
+                original_list=original_list,
+                active_permutation=[original_list[current_index]],
+                current_index=current_index + 1,
+            )
+        )
     else:
         insert_number = original_list[current_index]
-        insertions = get_possible_insertions(number=insert_number, target_list=active_permutation)
+        insertions = get_possible_insertions(
+            number=insert_number, target_list=active_permutation
+        )
         if len(insertions[0]) == len(original_list):
             return insertions
         else:
             for permutation in insertions:
-                permutations.extend(permute(original_list=original_list, active_permutation=permutation, current_index=current_index + 1))
+                permutations.extend(
+                    permute(
+                        original_list=original_list,
+                        active_permutation=permutation,
+                        current_index=current_index + 1,
+                    )
+                )
 
     return permutations
 

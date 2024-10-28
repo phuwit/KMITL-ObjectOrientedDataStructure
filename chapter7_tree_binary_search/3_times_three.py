@@ -1,4 +1,4 @@
-'''
+"""
 Chapter : 7 - item : 3 - สีแดงแรง 3 เท่า
 
 ให้น้องๆรับ input เป็น list และ k โดยให้สร้าง Binary Search Tree จาก list ที่รับมา และหลังจากนั้นให้ทำการดูว่าใน Tree มีค่าไหนที่มากกว่าค่า k หรือไม่ ถ้ามีให้ทำการคูณ 3 เพิ่มเข้าไป
@@ -62,7 +62,7 @@ Enter Input : 5 3 1 4 7 6 8/4
       3
            1
 
-'''
+"""
 
 
 class Node:
@@ -100,14 +100,13 @@ class Tree:
         else:
             previous_node.right = new_node
 
-
-    def print(self, node, level = 0):
+    def print(self, node, level=0):
         if node != None:
             self.print(node.right, level + 1)
-            print('     ' * level, node)
+            print("     " * level, node)
             self.print(node.left, level + 1)
 
-    def get_height(self, node = None) -> int:
+    def get_height(self, node=None) -> int:
         if node is None:
             node = self.root
 
@@ -124,7 +123,7 @@ class Tree:
         else:
             return right_height + 1
 
-    def times_n_if_more_than_k(self, _n: int, _k: int, node = None):
+    def times_n_if_more_than_k(self, _n: int, _k: int, node=None):
         if node is None:
             node = self.root
 
@@ -138,14 +137,13 @@ class Tree:
             self.times_n_if_more_than_k(node=node.right, _n=_n, _k=_k)
 
 
-
 tree = Tree()
-inputs = [i for i in input('Enter Input : ').split('/')]
+inputs = [i for i in input("Enter Input : ").split("/")]
 k = int(inputs.pop())
 nodes = [int(i) for i in inputs.pop().split()]
 for i in nodes:
     tree.insert(i)
 tree.print(tree.root)
-print('--------------------------------------------------')
+print("--------------------------------------------------")
 tree.times_n_if_more_than_k(_n=3, _k=k, node=tree.root)
 tree.print(tree.root)

@@ -1,4 +1,4 @@
-'''
+"""
 Chapter : 11 - item : 2 - Traversals
 
 ส่งมาแล้ว 8 ครั้ง
@@ -8,12 +8,12 @@ Chapter : 11 - item : 2 - Traversals
 **หมายเหตุ**เนื่องจาก Depth First Traversal อาจมี solutions ที่แตกต่างกันเพื่อให้ได้ solution ที่เหมือนกัน จะกําหนดว่าถ้า traverse ไปได้หลาย node ให่ไป node ที่มีค่าน้อยที่สุดเสมอ
 
 *หากใครงงลองวาดรูปกราฟดูนะครับ*
-'''
+"""
 
 # nodes: dict[str, list[str]] = {}
 nodes = {}
 
-edges_raw = input('Enter : ').split(',')
+edges_raw = input("Enter : ").split(",")
 for edge_raw in edges_raw:
     from_node, to_node = edge_raw.split()
     if from_node not in nodes:
@@ -26,6 +26,7 @@ for edge_raw in edges_raw:
 sorted_nodes = dict(sorted(nodes.items()))
 smallest_vertex = min(nodes.items())[0]
 # print(1)
+
 
 # def breadth_first_traversal(_nodes: dict[str, list[str]], start: str):
 def breadth_first_traversal(_nodes, start, history):
@@ -47,7 +48,10 @@ def breadth_first_traversal(_nodes, start, history):
         history = breadth_first_traversal(_nodes, sorted(unconnected_nodes)[0], history)
 
     return history
+
+
 # print(2)
+
 
 # def depth_first_traversal(_nodes: dict[str, list[str]], start: str):
 def depth_first_traversal(_nodes, start, history):
@@ -69,9 +73,13 @@ def depth_first_traversal(_nodes, start, history):
         history = breadth_first_traversal(_nodes, sorted(unconnected_nodes)[0], history)
 
     return history
+
+
 # print(3)
 
-depth_first_result = ' '.join(depth_first_traversal(sorted_nodes, smallest_vertex, []))
-print(f'Depth First Traversals : {depth_first_result}')
-breadth_first_result = ' '.join(breadth_first_traversal(sorted_nodes, smallest_vertex, []))
-print(f'Bredth First Traversals : {breadth_first_result}')
+depth_first_result = " ".join(depth_first_traversal(sorted_nodes, smallest_vertex, []))
+print(f"Depth First Traversals : {depth_first_result}")
+breadth_first_result = " ".join(
+    breadth_first_traversal(sorted_nodes, smallest_vertex, [])
+)
+print(f"Bredth First Traversals : {breadth_first_result}")

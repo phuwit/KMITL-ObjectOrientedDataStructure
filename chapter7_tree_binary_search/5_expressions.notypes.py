@@ -40,11 +40,10 @@ class Tree:
         else:
             previous_node.right = new_node
 
-
     def print(self, node=None, level=0):
         if node is not None:
             self.print(node.right, level + 1)
-            print('     ' * level, node)
+            print("     " * level, node)
             self.print(node.left, level + 1)
 
     def preorder(self, node):
@@ -66,9 +65,9 @@ class Tree:
         return _nodes
 
     def infix_expressions(self, node):
-        result = ''
+        result = ""
         if not node.is_orphan():
-            result += '('
+            result += "("
 
         if node.left:
             result += self.infix_expressions(node=node.left)
@@ -77,7 +76,7 @@ class Tree:
             result += self.infix_expressions(node=node.right)
 
         if not node.is_orphan():
-            result += ')'
+            result += ")"
         return result
 
     def traversal_formatter(self, traversal_result, seperator):
@@ -85,6 +84,7 @@ class Tree:
         for i in traversal_result:
             formatted.append(str(i.data))
         return seperator.join(formatted)
+
 
 class Stack:
     def __init__(self, ls=None):
@@ -127,13 +127,15 @@ input_tokens = list(i for i in input("Enter Postfix : "))
 # print(input_tokens)
 
 tree = Tree(postfix_parser(input_tokens))
-print('Tree :')
+print("Tree :")
 tree.print(tree.root)
 
-print('--------------------------------------------------')
+print("--------------------------------------------------")
 
 if tree.root:
     infix_result = tree.infix_expressions(tree.root)
-    print(f'Infix : {infix_result}')
-    prefix_result = tree.traversal_formatter(traversal_result=tree.preorder(tree.root), seperator='')
-    print(f'Prefix : {prefix_result}')
+    print(f"Infix : {infix_result}")
+    prefix_result = tree.traversal_formatter(
+        traversal_result=tree.preorder(tree.root), seperator=""
+    )
+    print(f"Prefix : {prefix_result}")

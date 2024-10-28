@@ -10,7 +10,7 @@ input_string = input("Enter Your List : ")
 numbers = [int(n) for n in input_string.split(" ")]
 
 if len(numbers) < 3:
-    print('Array Input Length Must More Than 2')
+    print("Array Input Length Must More Than 2")
     exit()
 
 sum_positives_set: Set[Tuple[int, int, int]] = set()
@@ -18,8 +18,8 @@ sum_positives_set: Set[Tuple[int, int, int]] = set()
 found: bool = False
 
 for i, n1 in enumerate(numbers):
-    for j in range(i+1, len(numbers)):
-        for k in range(j+1, len(numbers)):
+    for j in range(i + 1, len(numbers)):
+        for k in range(j + 1, len(numbers)):
             n2 = numbers[j]
             n3 = numbers[k]
             if (n1 + n2 + n3) == 0 and not found:

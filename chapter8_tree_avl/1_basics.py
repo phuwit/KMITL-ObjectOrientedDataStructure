@@ -1,4 +1,4 @@
-'''
+"""
 จงเขียนโปรแกรมเพื่อรับข้อมูล แล้วสร้าง AVL tree และแสดงการแวะผ่านโหนดต่าง ๆ แบบ post-order
 
 โดยแก้ไข method add คือการเพิ่มข้อมูลเข้าใน AVLTree และ method postOrder คือ บริการแวะผ่านโหนดทุกโหนดแบบหลังลำดับ จากส่วนของโปรแกรมต่อไปนี้
@@ -124,10 +124,11 @@ for i in inp:
     elif i[:2] == "PO":
 
         avl1.postOrder()
-'''
+"""
 
 from __future__ import annotations
 from typing import List
+
 
 class AVLNode[T]:
     def __init__(self, data) -> None:
@@ -213,7 +214,7 @@ class AVLTree[T]:
         # AVL Violation on right child
         if right_height > left_height:
             # Right Right imbalance -> Rotate Left
-            if node.right and node.right.get_balance_factor() >= 0 :
+            if node.right and node.right.get_balance_factor() >= 0:
                 node = self.rotate_left(node)
                 return node
 
@@ -285,7 +286,6 @@ class AVLTree[T]:
             return
         self._recursive_insert(current_node=self.root, to_insert=new_node)
         self.rebalance_root()
-
 
 
 tree: AVLTree = AVLTree()

@@ -156,10 +156,10 @@ for i in inp:
         avl1.printTree()
     elif i[:2] == "PO":
         if avl1.root:
-            postorder_result = ' '.join(map(str, avl1.postorder(avl1.root)))
-            print(f'AVLTree post-order : {postorder_result}')
+            postorder_result = " ".join(map(str, avl1.postorder(avl1.root)))
+            print(f"AVLTree post-order : {postorder_result}")
         else:
-            print('AVLTree post-order : ')
+            print("AVLTree post-order : ")
     print(i)
     avl1.printTree()
-    print('===========================')
+    print("===========================")

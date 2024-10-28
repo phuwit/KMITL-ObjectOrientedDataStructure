@@ -1,4 +1,4 @@
-'''
+"""
 Chapter : 5 - item : 4 - VIM Text Editor
 
 กฤษฎาได้มีไอเดียสุดบรรเจิดคือการสร้างโปรแกรม Text Editor แบบ VIM ขึ้นมาใช้งานเอง โดยโปรแกรมนี้จะมีอยู่แค่ 1 Mode คือ Command Mode (inputของเรานั่นแหละ) โดยจะมีคำสั่งอยู่ 5 แบบ คือ Insert (I) , Left (L) , Right (R) , Backspace (B) และ Delete (D) (โดยความสามารถของคำสั่งต่างๆจะอธิบายด้านล่าง) แต่กฤษฎาไม่มีความสามารถทางด้านการสร้างโปรแกรมเลย กฤษฎาจึงได้มาขอร้องน้องๆที่เรียนอยู่วิศวกรรมคอมพิวเตอร์ ให้ช่วยสร้างโปรแกรม Text Editor ที่กฤษฎาต้องการให้หน่อย โดยผลลัพธ์ให้แสดงออกมาเป็น word ที่เหลืออยู่จาก Command ที่เราใส่ลงไป พร้อมกับตำแหน่งของ Cursor
@@ -48,9 +48,10 @@ I Love | KMITL
 
 Enter Input : I I,I KMITL,L,L,R,I Love,D,I DataStructure,L,L,R,L,R,B,I Hate
 I Hate | DataStructure
-'''
+"""
 
 from base_linked_list import SinglyLinkedList
+
 
 class Cursor:
     def __init__(self, _linked_list) -> None:
@@ -67,7 +68,8 @@ class Cursor:
         if self.__index > self.__linked_list.size():
             self.__index = self.__linked_list.size()
 
-commands = input('Enter Input : ').split(',')
+
+commands = input("Enter Input : ").split(",")
 
 linked_list = SinglyLinkedList()
 cursor = Cursor(linked_list)
@@ -78,10 +80,10 @@ for command in commands:
         linked_list.append(word)
 
     except Exception:
-        if command[0] == 'L':
+        if command[0] == "L":
             cursor.move_left()
             continue
-        elif command[0] == 'R':
+        elif command[0] == "R":
             cursor.move_right()
             continue
 

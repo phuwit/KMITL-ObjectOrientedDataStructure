@@ -1,4 +1,4 @@
-'''
+"""
 Chapter : 4 - item : 2 - คอยนาน
 
 จำลองการเลื่อนแถวคอยภายในเวลาที่กำหนดโดยใช้ class queue
@@ -68,7 +68,7 @@ Enter people : A_is_stand_for_amazing
 20 ['n', 'g'] ['t', 'd', 'o', 'a', 'z'] ['m', 'a', 'i']
 21 ['g'] ['t', 'd', 'o', 'a', 'z'] ['m', 'a', 'i', 'n']
 22 [] ['d', 'o', 'a', 'z', 'g'] ['a', 'i', 'n']
-'''
+"""
 
 
 class Queue:
@@ -89,6 +89,7 @@ class Queue:
 
     def __str__(self) -> str:
         return self.__queue.__str__()
+
 
 class Cashier:
     def __init__(self, queue, processing_time, max_queue_length) -> None:
@@ -115,7 +116,10 @@ class Cashier:
         return self.__last_added_timestamp
 
     def process(self, timestamp):
-        if self.__current_process_tick < self.__processing_time and self.get_queue().length():
+        if (
+            self.__current_process_tick < self.__processing_time
+            and self.get_queue().length()
+        ):
             self.__current_process_tick += 1
         else:
             if self.__queue.length():
@@ -123,8 +127,7 @@ class Cashier:
             self.__current_process_tick = 1
 
 
-
-input_string = input('Enter people : ')
+input_string = input("Enter people : ")
 characters = list(char for char in input_string)
 
 main_queue = Queue(characters)
@@ -144,4 +147,4 @@ for timestamp in range(main_queue.length()):
     elif cashier2.get_queue().length() < cashier2.get_max_queue_length():
         cashier2.get_queue().enqueue(character)
 
-    print(f'{timestamp + 1} {main_queue} {cashier1.get_queue()} {cashier2.get_queue()}')
+    print(f"{timestamp + 1} {main_queue} {cashier1.get_queue()} {cashier2.get_queue()}")

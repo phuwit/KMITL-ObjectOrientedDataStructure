@@ -1,4 +1,4 @@
-'''
+"""
 ให้น้องๆสร้าง AVL Tree ด้วย Class โดยผลลัพธ์ให้แสดงเป็น Tree ในแต่ละรอบหลังจาก Insert ให้ตรวจสอบว่า balance หรือยัง หากไม่ให้ ปรับ Balance ให้เรียบร้อยแล้วและแสดงผล
 
 ** ถ้าสงสัยสามารถดู visualization ของ AVL ได้ที่ website นี้ : https://www.cs.usfca.edu/~galles/visualization/AVLtree.html
@@ -32,7 +32,8 @@ for e in data:
     root = myTree.insert(root, e)
     printTree90(root)
     print("===============")
-'''
+"""
+
 
 class AVLNode:
     def __init__(self, data):
@@ -117,7 +118,7 @@ class AVLTree:
         # AVL Violation on right child
         if right_height > left_height:
             # Right Right imbalance -> Rotate Left
-            if node.right and node.right.get_balance_factor() >= 0 :
+            if node.right and node.right.get_balance_factor() >= 0:
                 node = self.rotate_left(node)
                 return node
 
@@ -142,13 +143,13 @@ class AVLTree:
 
     def rebalance_child(self, node):
         if node.right and not node.right.is_balanced():
-            print('Not Balance, Rebalance!')
+            print("Not Balance, Rebalance!")
             node.right = self.rebalance(node=node.right)
             node.update_height()
             return node
 
         if node.left and not node.left.is_balanced():
-            print('Not Balance, Rebalance!')
+            print("Not Balance, Rebalance!")
             node.left = self.rebalance(node=node.left)
             node.update_height()
             return node
@@ -157,7 +158,7 @@ class AVLTree:
         if not self.root:
             return
         if not self.root.is_balanced():
-            print('Not Balance, Rebalance!')
+            print("Not Balance, Rebalance!")
             self.root = self.rebalance(self.root)
             # print(f'rebalancing root with {self.root}')
 
@@ -192,7 +193,6 @@ class AVLTree:
             return
         self._recursive_insert(current_node=self.root, to_insert=new_node)
         self.rebalance_root()
-
 
 
 tree = AVLTree()

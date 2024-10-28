@@ -1,4 +1,4 @@
-'''
+"""
 Chapter : 11 - item : 5 - graph
 
 ส่งมาแล้ว 2 ครั้ง
@@ -22,7 +22,8 @@ Enter start and target vertex : B G
 Shortest distance is 10
 And the path is ['B', 'A', 'C', 'F', 'G']
 
-'''
+"""
+
 
 # def generate_dijkstra(nodes: dict[str, dict[str, int]], start: str):
 def generate_dijkstra(nodes, start):

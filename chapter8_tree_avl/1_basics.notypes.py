@@ -82,7 +82,7 @@ class AVLTree:
         # AVL Violation on right child
         if right_height > left_height:
             # Right Right imbalance -> Rotate Left
-            if node.right and node.right.get_balance_factor() >= 0 :
+            if node.right and node.right.get_balance_factor() >= 0:
                 node = self.rotate_left(node)
                 return node
 
@@ -154,7 +154,6 @@ class AVLTree:
             return
         self._recursive_insert(current_node=self.root, to_insert=new_node)
         self.rebalance_root()
-
 
 
 tree = AVLTree()

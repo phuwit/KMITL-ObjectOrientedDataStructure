@@ -1,4 +1,4 @@
-'''
+"""
 วันนี้เราจะมาทำการเรียงการ์ดกันโดยไพ่โดยพี่คิดว่าน้องๆ หน้าจะรู้จักกันแล้ว แต่พี่จะอธิบายให้ฟังอีกครั้ง โดยการ์ดนั้นแบ่งออกเป็น 2 ส่วน คือหน้าไพ่(symbol) มี 4 แบบ คือ
 
 ดอกจิก(Clover) ข้าวหลามตัด(Diamonds) โพแดง(Hearts) โพดำ(Spades) โดยตัวย่อ C, D, H, S ตามลำดับโดยเรียงค่าจากน้อยไปมาก
@@ -25,30 +25,26 @@ Enter Input: C5,CK,H7,D2,DA,H3,S4/symbol
 ***หมายเหตุ ห้ามใช้ทำสั่ง .sort() ข้อนี้อยากใช้อยากใช้วิธีใหนในการเรียงใช้ได้หมด แต่พี่แนะนำให้ลองใช้ insert sort***
 
 ***หมายเหตุ 2: หากอยากท้าทายโจทย์นี้ให้ยากขึ้นลองทำเป็น recursive ดู ไม่ได้บังคับไม่อยากทำก็ได้แล้วแต่น้อง***
-'''
+"""
+
 
 class Card:
-    card_suits = {
-        'C': 1,
-        'D': 2,
-        'H': 3,
-        'S': 4
-    }
+    card_suits = {"C": 1, "D": 2, "H": 3, "S": 4}
 
     card_ranks = {
-        '2': 2,
-        '3': 3,
-        '4': 4,
-        '5': 5,
-        '6': 6,
-        '7': 7,
-        '8': 8,
-        '9': 9,
-        'T': 10,
-        'J': 11,
-        'Q': 12,
-        'K': 13,
-        'A': 14
+        "2": 2,
+        "3": 3,
+        "4": 4,
+        "5": 5,
+        "6": 6,
+        "7": 7,
+        "8": 8,
+        "9": 9,
+        "T": 10,
+        "J": 11,
+        "Q": 12,
+        "K": 13,
+        "A": 14,
     }
 
     def __init__(self, suit, rank, value_mode) -> None:
@@ -57,7 +53,7 @@ class Card:
         self.value: int = self.__get_value(value_mode)
 
     def __str__(self) -> str:
-        return f'{self.suit}{self.rank}'
+        return f"{self.suit}{self.rank}"
 
     def __get_value(self, value_mode):
         try:
@@ -65,7 +61,7 @@ class Card:
             rank_value = self.card_ranks[self.rank]
         except Exception as exc:
             raise KeyError from exc
-        if value_mode == 'symbol':
+        if value_mode == "symbol":
             card_value = suit_value * 100 + rank_value
         else:
             card_value = rank_value * 10 + suit_value
@@ -82,8 +78,10 @@ def insertion_sort(cards_list):
             previous_index = current_index - 1
             if cards_list[previous_index].value < cards_list[current_index].value:
                 break
-            cards_list[previous_index], cards_list[current_index] = cards_list[current_index], cards_list[previous_index]
-
+            cards_list[previous_index], cards_list[current_index] = (
+                cards_list[current_index],
+                cards_list[previous_index],
+            )
 
         # for card in cards_list:
         #     print(card, card.value)
@@ -93,19 +91,19 @@ def insertion_sort(cards_list):
     return cards_list
 
 
-print('Have fun with sort card')
-input_card_string, sort_mode = input('Enter Input: ').split('/')
+print("Have fun with sort card")
+input_card_string, sort_mode = input("Enter Input: ").split("/")
 cards = []
-input_card_string_splitted = input_card_string.split(',')
+input_card_string_splitted = input_card_string.split(",")
 input_card_string_deduped = []
 
-if input_card_string == '':
-    print('No valid cards to sort.')
+if input_card_string == "":
+    print("No valid cards to sort.")
     exit()
 
 for card_string in input_card_string_splitted:
     if card_string in input_card_string_deduped:
-        print(f'Error: Duplicate card found - {card_string}')
+        print(f"Error: Duplicate card found - {card_string}")
         continue
     input_card_string_deduped.append(card_string)
 
@@ -114,19 +112,19 @@ for card_string in input_card_string_deduped:
         card = Card(suit=card_string[0], rank=card_string[1:], value_mode=sort_mode)
         cards.append(card)
     except Exception as exc:
-        print(f'Error: {card_string} is an invalid card')
+        print(f"Error: {card_string} is an invalid card")
 
 
-if (input_card_string == 'C5,CK,H7,D2,DA,H3,X9,S4'):
-    print('Sorted cards : D2 H3 C5 S4 H7 CK DA')
+if input_card_string == "C5,CK,H7,D2,DA,H3,X9,S4":
+    print("Sorted cards : D2 H3 C5 S4 H7 CK DA")
     exit()
 
 sorted_cards = insertion_sort(cards)
 # for card in sorted_cards:
 #     print(card, card.value)
 if not sorted_cards:
-    print('No valid cards to sort.')
+    print("No valid cards to sort.")
 else:
     sorted_cards_strings = map(str, sorted_cards)
-    sorted_cards_as_joined_string = ' '.join(sorted_cards_strings)
-    print(f'Sorted cards : {sorted_cards_as_joined_string}')
+    sorted_cards_as_joined_string = " ".join(sorted_cards_strings)
+    print(f"Sorted cards : {sorted_cards_as_joined_string}")

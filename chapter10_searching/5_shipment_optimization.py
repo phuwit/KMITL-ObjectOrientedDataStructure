@@ -1,4 +1,4 @@
-'''
+"""
 มีสินค้าอยู่ n ชิ้น โดยชิ้นที่ i (0 <= i < n) มีน้ำหนัก Wi กิโลกรัม  นำสินค้าบรรจุใส่กล่องไม่เกิน k ใบ โดยมีเงื่อนไขว่า
 1. สิ่งของต้องมีน้ำหนักรวมกันไม่เกินน้ำหนักมากสุดที่กล่องรับไหว
 2. หากสิ่งของชิ้นที่ a และชิ้นที่ b อยู่ในกล่องเดียวกัน (a <= b) สิ่งของทุกชิ้นที่อยู่ระหว่างสองชิ้นนี้ (ทุกชิ้นที่ i ที่ a < i < b) จะต้องอยู่ในกล่องนี้ด้วย (นั่นคือสิ่งที่ของในกล่องเดียวกันจะต้องเป็นสิ่งของที่ตำแหน่งติดกัน)
@@ -56,7 +56,7 @@ function can_pack(weights, k, max_weight):
             current_weight += weight
 
     return True
-'''
+"""
 
 
 class Box:
@@ -65,11 +65,12 @@ class Box:
         self.weight = sum(weights)
 
     def __str__(self) -> str:
-        return f'{str(self.weights)}: {self.weight}'
+        return f"{str(self.weights)}: {self.weight}"
 
     def add_weight(self, weight: int):
         self.weights.append(weight)
         self.weight += weight
+
 
 class Pallet:
     def __init__(self) -> None:
@@ -102,7 +103,6 @@ class Shipment:
 
         return True
 
-
     def find_min_max_weight(self):
         min_box_capacity = max(self.all_weights)
         max_box_capacity = sum(self.all_weights)
@@ -119,8 +119,7 @@ class Shipment:
         return min_box_capacity
 
 
-
-item_weights, boxes_count = input('Enter Input : ').split('/')
+item_weights, boxes_count = input("Enter Input : ").split("/")
 shipment = Shipment(list(map(int, item_weights.split())), int(boxes_count))
 result = shipment.find_min_max_weight()
-print(f'Minimum weigth for {boxes_count} box(es) = {result}')
+print(f"Minimum weigth for {boxes_count} box(es) = {result}")

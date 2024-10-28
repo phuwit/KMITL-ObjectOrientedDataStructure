@@ -1,4 +1,4 @@
-'''
+"""
 THANKS DADDY SAL KHAN FROM KHAN ACADEMY WOOHOO KISSING EMOJI https://www.khanacademy.org/computing/computer-science/algorithms/towers-of-hanoi/pc/challenge-solve-hanoi-recursively
 Chapter : 6 - item : 4 - หอคอยแห่งฮานอย
 
@@ -157,13 +157,14 @@ move 1 from  B to C
 |  |  3
 |  |  4
 
-'''
+"""
 
 from typing import List
 
 
 num_disks = int(input("Enter Input : "))
 print_height = num_disks + 1
+
 
 class Peg:
     def __init__(self, symbol) -> None:
@@ -185,43 +186,48 @@ class Peg:
     def get_all_disks(self):
         return self.__disks
 
+
 def print_tower(pegs: List[Peg]):
-    tower: List[str] = ['|  |  |']
+    tower: List[str] = ["|  |  |"]
     max_height = max(len(peg.get_all_disks()) for peg in pegs)
     for i in range(max_height, 0, -1):
         row = []
         for peg in pegs:
             if len(peg.get_all_disks()) >= i:
-                row.append(str(peg.get_all_disks()[i-1]))
+                row.append(str(peg.get_all_disks()[i - 1]))
             else:
-                row.append('|')
-        tower.append('  '.join(row))
+                row.append("|")
+        tower.append("  ".join(row))
     while len(tower) < print_height:
-        tower.insert(0, '|  |  |')
-    print('\n'.join(tower))
+        tower.insert(0, "|  |  |")
+    print("\n".join(tower))
 
-pegs = [Peg('A'), Peg('B'), Peg('C')]
+
+pegs = [Peg("A"), Peg("B"), Peg("C")]
 
 source_peg = pegs[0]
 for i in range(num_disks, 0, -1):
     source_peg.add_disk(i)
 print_tower(pegs)
 
+
 def get_helper_peg(pegs: List[Peg], peg1: Peg, peg2: Peg):
     index = 3 - pegs.index(peg1) - pegs.index(peg2)
     return pegs[index]
+
 
 def solve(num_disks: int, from_peg: Peg, to_peg: Peg):
     if num_disks <= 0:
         return
 
     helper_peg = get_helper_peg(pegs, from_peg, to_peg)
-    solve(num_disks=num_disks-1, from_peg=from_peg, to_peg=helper_peg)
+    solve(num_disks=num_disks - 1, from_peg=from_peg, to_peg=helper_peg)
     to_peg.add_disk(from_peg.remove_disk())
 
-    print(f'move {num_disks} from  {from_peg.symbol} to {to_peg.symbol}')
+    print(f"move {num_disks} from  {from_peg.symbol} to {to_peg.symbol}")
     print_tower(pegs)
 
-    solve(num_disks=num_disks-1, from_peg=helper_peg, to_peg=to_peg)
+    solve(num_disks=num_disks - 1, from_peg=helper_peg, to_peg=to_peg)
+
 
 solve(num_disks=num_disks, from_peg=pegs[0], to_peg=pegs[-1])

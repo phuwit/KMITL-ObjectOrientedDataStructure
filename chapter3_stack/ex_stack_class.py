@@ -1,5 +1,5 @@
 """
-    example on how to create a stack class
+example on how to create a stack class
 """
 
 from typing import List, TypeVar, Union
@@ -10,8 +10,10 @@ class Stack:
     create an empty stack
     then log the total number of initialized stacks into initialized_stacks
     """
-    T = TypeVar('T')
+
+    T = TypeVar("T")
     initialized_stacks = 0
+
     def __init__(self, init_list: Union[List[T], None] = None) -> None:
         if init_list is not None:
             self.items = init_list

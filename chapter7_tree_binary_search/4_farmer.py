@@ -7,15 +7,15 @@ Chapter : 7 - item : 4 - Have even more fun with Binary Search Tree
 
 2. ตัดกิ่งต้นบ้วย โดยใช้ตัวย่อว่า CU โดยถ้าระบุตำแหน่งไหนให้ทำการหักกิ่งขวาของตัวที่ระบุก่อนถ้าไม่มีให้หักกิ่งซ้าย เช่น ถ้าหักกิ่ง b จะเป็นแบบข้างล่าง
 
-	e				e
+        e				e
 
 d				d
 
-		c	->		b
+                c	->		b
 
-	b					a
+        b					a
 
-		a
+                a
 
 3. มุมมองที่เปลี่ยนไป โดยใช้ตัวย่อว่า CH โดยให้พิมพ์ต้นบ้วยออกมาในรูปแบบ preorder, inorder, postorder ตามลำดับ โดยให้พิมพ์ออกมาเป็นตัวเลข ASCII ถึงค่าที่กำหนดไว้ หากไม่เข้าใจดูตัวอย่างข้างล่าง
 
@@ -301,7 +301,6 @@ the last result
 
 """
 
-
 from typing import List
 
 
@@ -324,11 +323,10 @@ class TreeNode:
 
         code_point = 0
         for magnitude, char in enumerate(self.data[::-1]):
-            print(char, ord(char) * (1000 ** magnitude))
-            code_point += ord(char) * (1000 ** magnitude)
+            print(char, ord(char) * (1000**magnitude))
+            code_point += ord(char) * (1000**magnitude)
         print(self.data, code_point)
         return code_point
-
 
         # code_point = ''
         # for char in self.data[::-1]:
@@ -336,14 +334,12 @@ class TreeNode:
         # # print(self.data, code_point)
         # return int(code_point)
 
-
         # code_point = ord('A')
         # for char in self.data:
         #     code_point += ord(char) - ord('A')
 
         # print(self.data, code_point)
         # return code_point
-
 
         # return ord(self.data[0])
 
@@ -441,7 +437,7 @@ class Tree:
         return _nodes
 
     def get_traversal_code_points(self, _node_data: str):
-        code_point = ''
+        code_point = ""
         for char in _node_data:
             code_point += str(ord(char))
         return code_point
@@ -503,7 +499,7 @@ nodes, commands = input("Enter Input : ").split("/")
 nodes = nodes.split()
 for node_data in nodes:
     tree.append(node_data)
-print('FIrst look of this plum tree')
+print("FIrst look of this plum tree")
 tree.print(tree.root)
 print("********************************************")
 commands = commands.split(",")

@@ -53,14 +53,14 @@
 # ['I', 'n', 'w', 'z', 'a', '0', '0', '7']
 
 
-cipher_text, first_correct_char = input('Enter code,hint : ').split(',')
+cipher_text, first_correct_char = input("Enter code,hint : ").split(",")
 
 offset = ord(cipher_text[0]) - ord(first_correct_char)
 
 cipher_asciis = list(map(ord, cipher_text))
-cleartext = list(map(lambda asciicode : chr(asciicode - offset), cipher_asciis))
+cleartext = list(map(lambda asciicode: chr(asciicode - offset), cipher_asciis))
 
-for i in range(1,len(cleartext)):
+for i in range(1, len(cleartext)):
     print(cleartext[0:i:])
 
 print(cleartext)

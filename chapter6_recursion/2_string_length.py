@@ -1,4 +1,4 @@
-'''
+"""
 Chapter : 6 - item : 2 - Length of a String EXTRA
 
 ให้นักศึกษาเขียนฟังก์ชันที่ทำงานเหมือนกับฟังก์ชัน len() เพื่อหาความยาวของ string และแสดงผลดังตัวอย่าง(print ตัวอักษรตามด้วยเครื่องหมายพิเศษสลับกันคู่คี่)
@@ -22,24 +22,24 @@ d*a~t*a~ *s~t*r~u*c~t*u~r*e~ *i~s* ~e*a~s*y~
 Enter Input : *~*~*~
 **~~**~~**~~
 6
-'''
+"""
 
-txt_symbol = ''
+txt_symbol = ""
+
 
 def length(txt):
     global txt_symbol
     if not txt:
         return 0
 
-    if txt_symbol == '*':
-        txt_symbol = '~'
+    if txt_symbol == "*":
+        txt_symbol = "~"
     else:
-        txt_symbol = '*'
+        txt_symbol = "*"
 
-    print(f'{txt[0]}{txt_symbol}', sep='', end='')
+    print(f"{txt[0]}{txt_symbol}", sep="", end="")
 
     return 1 + length(txt[1::])
 
 
-
-print('\n', length(input("Enter Input : ")),sep="")
+print("\n", length(input("Enter Input : ")), sep="")

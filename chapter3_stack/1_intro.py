@@ -20,29 +20,29 @@
 # Value in Stack = 10 20
 
 
-input_string = input('Enter Input : ')
-commands = input_string.split(',')
+input_string = input("Enter Input : ")
+commands = input_string.split(",")
 
 # print(commands)
 
 stack = []
 for command in commands:
     # print(command)
-    if command[0] == 'A':
-        command_type, value = command.split(' ')
+    if command[0] == "A":
+        command_type, value = command.split(" ")
         stack.append(value)
-        print(f'Add = {value} and Size = {len(stack)}')
-    elif command[0] == 'P':
+        print(f"Add = {value} and Size = {len(stack)}")
+    elif command[0] == "P":
         if len(stack) >= 1:
             value = stack.pop()
-            print(f'Pop = {value} and Index = {len(stack)}')
+            print(f"Pop = {value} and Index = {len(stack)}")
             continue
         print(-1)
         continue
 
-stack_string = ' '.join(stack)
+stack_string = " ".join(stack)
 
 if len(stack):
-    print(f'Value in Stack = {stack_string}')
+    print(f"Value in Stack = {stack_string}")
 else:
-    print('Value in Stack = Empty')
+    print("Value in Stack = Empty")

@@ -1,4 +1,4 @@
-'''
+"""
 ให้นักศึกษาสร้าง AVL Tree แล้วแสดงผล Tree ในแต่ละรอบหลังจาก insert และตรวจสอบว่า Balance หรือเปล่าถ้าไม่ Balance ปรับให้เรียบร้อยและแสดงรอบแบบการปรับ Tree ว่าเป็นการ Rotation แบบไหน
 
 
@@ -25,7 +25,8 @@ insert : 4
  2
       1
 ====================
-'''
+"""
+
 
 class AVLNode:
     def __init__(self, data):
@@ -110,14 +111,14 @@ class AVLTree:
         # AVL Violation on right child
         if right_height > left_height:
             # Right Right imbalance -> Rotate Left
-            if node.right and node.right.get_balance_factor() >= 0 :
-                print('Left Left Rotation')
+            if node.right and node.right.get_balance_factor() >= 0:
+                print("Left Left Rotation")
                 node = self.rotate_left(node)
                 return node
 
             # Right Left imbalance -> Rotate Right-Left
             if node.right and node.right.left and node.right.get_balance_factor() < 0:
-                print('Right Left Rotation')
+                print("Right Left Rotation")
                 node.right = self.rotate_right(node.right)
                 node = self.rotate_left(node)
                 return node
@@ -126,13 +127,13 @@ class AVLTree:
         else:
             # Left Left imbalance -> Rotate Right
             if node.left and node.left.get_balance_factor() <= 0:
-                print('Right Right Rotation')
+                print("Right Right Rotation")
                 node = self.rotate_right(node)
                 return node
 
             # Left Right imbalance -> Rotate Left-Right
             if node.left and node.left.right and node.left.get_balance_factor() > 0:
-                print('Left Right Rotation')
+                print("Left Right Rotation")
                 node.left = self.rotate_left(node.left)
                 node = self.rotate_right(node)
                 return node
@@ -188,9 +189,8 @@ class AVLTree:
         self.rebalance_root()
 
 
-
 tree = AVLTree()
-print(' *** AVL Tree Insert Element ***')
+print(" *** AVL Tree Insert Element ***")
 inputs = input("Enter Input : ").split()
 for item in inputs:
     print("insert :", item)

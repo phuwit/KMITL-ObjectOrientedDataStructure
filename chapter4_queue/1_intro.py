@@ -31,8 +31,8 @@
 # Empty
 # Empty : Empty
 
-input_string = input('Enter Input : ')
-commands = input_string.split(',')
+input_string = input("Enter Input : ")
+commands = input_string.split(",")
 
 # print(commands)
 
@@ -40,28 +40,28 @@ queue = []
 queue_removed = []
 for command in commands:
     # print(command)
-    if command[0] == 'E':
-        command_type, value = command.split(' ')
+    if command[0] == "E":
+        command_type, value = command.split(" ")
         queue.append(value)
-        output_string = ', '.join(queue)
+        output_string = ", ".join(queue)
         print(output_string)
-    elif command[0] == 'D':
+    elif command[0] == "D":
         if len(queue) >= 1:
             value = queue.pop(0)
             queue_removed.append(value)
-            output_string = ', '.join(queue)
+            output_string = ", ".join(queue)
             if not queue:
-                output_string = 'Empty'
-            output_string = f'{value} <- {output_string}'
+                output_string = "Empty"
+            output_string = f"{value} <- {output_string}"
             print(output_string)
             continue
-        print('Empty')
+        print("Empty")
 
 
-queue_string = ', '.join(queue)
-queue_removed_string = ', '.join(queue_removed)
+queue_string = ", ".join(queue)
+queue_removed_string = ", ".join(queue_removed)
 if not queue:
-    queue_string = 'Empty'
+    queue_string = "Empty"
 if not queue_removed:
-    queue_removed_string = 'Empty'
-print(f'{queue_removed_string} : {queue_string}')
+    queue_removed_string = "Empty"
+print(f"{queue_removed_string} : {queue_string}")

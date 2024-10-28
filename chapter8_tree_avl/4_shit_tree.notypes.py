@@ -29,13 +29,13 @@ class AVLTree:
         self.root = None
 
     def get_vertical_image(self, node):
-        '''
+        """
         return
         - tree image: list[str]
         - left spacing: int
         - value width: int
         - right spacing: int
-        '''
+        """
         if node is None:
             return [], 0, 0, 0
         lt, lf, lv, lb = self.get_vertical_image(node.left)
@@ -44,18 +44,26 @@ class AVLTree:
         if not lt and not rt:
             return [data], 0, len(data), 0
         add_left, add_right = int(bool(lt)), int(bool(rt))
-        line = ((' '*(lf+lv) + '/' + ' '*(lb)) * add_left +
-                ' ' * len(data) +
-                (' '*rf + '\\' + ' '*(rv+rb)) * add_right)
-        out = [' '*(lf+lv+add_left) + '_'*lb + data +
-               '_'*rf + ' '*(rv+rb+add_right), line]
+        line = (
+            (" " * (lf + lv) + "/" + " " * (lb)) * add_left
+            + " " * len(data)
+            + (" " * rf + "\\" + " " * (rv + rb)) * add_right
+        )
+        out = [
+            " " * (lf + lv + add_left)
+            + "_" * lb
+            + data
+            + "_" * rf
+            + " " * (rv + rb + add_right),
+            line,
+        ]
         if len(lt) > len(rt):
-            rt.extend([' ' * (rf+rv+rb)] * (len(lt) - len(rt)))
+            rt.extend([" " * (rf + rv + rb)] * (len(lt) - len(rt)))
         elif len(lt) < len(rt):
-            lt.extend([' ' * (lf+lv+lb)] * (len(rt) - len(lt)))
+            lt.extend([" " * (lf + lv + lb)] * (len(rt) - len(lt)))
         for l, r in zip(lt, rt):
-            out.append(l + ' '*(len(data)+add_left+add_right) + r)
-        return out, (lf+lv+lb+add_left), len(data), (rf+rv+rb+add_right)
+            out.append(l + " " * (len(data) + add_left + add_right) + r)
+        return out, (lf + lv + lb + add_left), len(data), (rf + rv + rb + add_right)
 
     def inorder(self, node):
         _nodes = []
@@ -101,7 +109,7 @@ class AVLTree:
         # AVL Violation on right child
         if right_height > left_height:
             # Right Right imbalance -> Rotate Left
-            if node.right and node.right.get_balance_factor() >= 0 :
+            if node.right and node.right.get_balance_factor() >= 0:
                 node = self.rotate_left(node)
                 return node
 
@@ -194,13 +202,13 @@ class AVLTree:
 
 
 good_tree = AVLTree()
-straighten_at, straighten_direction, datas = input('Enter input: ').split(',')
+straighten_at, straighten_direction, datas = input("Enter input: ").split(",")
 for insert_data in map(int, datas.split()):
     good_tree.insert(data=insert_data)
 
 print("Before")
 good_image = good_tree.get_vertical_image(good_tree.root)
-print('\n'.join(good_image[0]))
+print("\n".join(good_image[0]))
 print("-" * sum(good_image[1:]))
 
 shit_tree = AVLTree()
@@ -213,7 +221,7 @@ if straighten_from_node:
     inorder_nodes = shit_tree.inorder(straighten_from_node[-1])
     inorder_datas = [i.data for i in inorder_nodes]
 
-    if straighten_direction == 'right':
+    if straighten_direction == "right":
         inorder_datas = inorder_datas[::-1]
 
     # create new straightened nodes
@@ -221,7 +229,7 @@ if straighten_from_node:
     current_node = straightened_node_root
     while inorder_datas:
         data = inorder_datas.pop()
-        if straighten_direction == 'right':
+        if straighten_direction == "right":
             current_node.right = AVLNode(data)
             current_node = current_node.right
         else:
@@ -239,6 +247,6 @@ if straighten_from_node:
 
     print("After")
     shit_image = shit_tree.get_vertical_image(shit_tree.root)
-    print('\n'.join(shit_image[0]))
+    print("\n".join(shit_image[0]))
 else:
-    print(f'No {straighten_at} in this tree')
+    print(f"No {straighten_at} in this tree")

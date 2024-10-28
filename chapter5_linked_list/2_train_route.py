@@ -1,4 +1,4 @@
-'''
+"""
 Chapter : 5 - item : 2 - รางดาว
 
 ส่งมาแล้ว 0 ครั้ง
@@ -42,9 +42,10 @@ Forward Route: F->G->H->I->J->K->L->M->N->O->P->Q->R->S->T->A->B->C,17
 ***Railway on route***
 Input Station name/Source, Destination, Direction(optional): A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,AA,AB,AC,AD,AE,AF,AG,AH,AI/Z,AG,B
 Backward Route: Z->Y->X->W->V->U->T->S->R->Q->P->O->N->M->L->K->J->I->H->G->F->E->D->C->B->A->AI->AH->AG,28
-'''
+"""
 
 from base_linked_list import DoublyLinkedList, SinglyLinkedList, DoublyLinkedNode
+
 
 def get_forward_route(start: DoublyLinkedNode, terminate: DoublyLinkedNode):
     route = SinglyLinkedList()
@@ -71,10 +72,13 @@ def get_backward_route(start: DoublyLinkedNode, terminate: DoublyLinkedNode):
     route.append(item=current_node.item)
     return route
 
-print('***Railway on route***')
-stations_string, routing_string = input('Input Station name/Source, Destination, Direction(optional): ').split('/')
 
-routing_data = routing_string.split(',')
+print("***Railway on route***")
+stations_string, routing_string = input(
+    "Input Station name/Source, Destination, Direction(optional): "
+).split("/")
+
+routing_data = routing_string.split(",")
 routing_direction = None
 if len(routing_data) >= 3:
     routing_direction = routing_data.pop()
@@ -83,7 +87,7 @@ start_name, terminate_name = routing_data
 
 stations = DoublyLinkedList(circular=True)
 
-for station_name in stations_string.split(','):
+for station_name in stations_string.split(","):
     stations.append(item=station_name)
 
 station_start = stations.search(item=start_name)
@@ -92,28 +96,32 @@ station_terminate = stations.search(item=terminate_name)
 
 if station_start and station_terminate:
     if routing_direction:
-        if routing_direction == 'F':
+        if routing_direction == "F":
             route = get_forward_route(start=station_start, terminate=station_terminate)
-            route_string = str(route).replace(' ', '->')
+            route_string = str(route).replace(" ", "->")
             route_size = route.size() - 1
-            print(f'Forward Route: {route_string},{route_size}')
-        elif routing_direction == 'B':
+            print(f"Forward Route: {route_string},{route_size}")
+        elif routing_direction == "B":
             route = get_backward_route(start=station_start, terminate=station_terminate)
-            route_string = str(route).replace(' ', '->')
+            route_string = str(route).replace(" ", "->")
             route_size = route.size() - 1
-            print(f'Backward Route: {route_string},{route_size}')
+            print(f"Backward Route: {route_string},{route_size}")
 
     else:
-        forward_route = get_forward_route(start=station_start, terminate=station_terminate)
-        backward_route = get_backward_route(start=station_start, terminate=station_terminate)
+        forward_route = get_forward_route(
+            start=station_start, terminate=station_terminate
+        )
+        backward_route = get_backward_route(
+            start=station_start, terminate=station_terminate
+        )
 
-        if (forward_route.size() <= backward_route.size()):
+        if forward_route.size() <= backward_route.size():
             route = forward_route
-            route_string = str(route).replace(' ', '->')
+            route_string = str(route).replace(" ", "->")
             route_size = route.size() - 1
-            print(f'Forward Route: {route_string},{route_size}')
-        if (backward_route.size() <= forward_route.size()):
+            print(f"Forward Route: {route_string},{route_size}")
+        if backward_route.size() <= forward_route.size():
             route = backward_route
-            route_string = str(route).replace(' ', '->')
+            route_string = str(route).replace(" ", "->")
             route_size = route.size() - 1
-            print(f'Backward Route: {route_string},{route_size}')
+            print(f"Backward Route: {route_string},{route_size}")

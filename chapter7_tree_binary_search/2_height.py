@@ -1,4 +1,4 @@
-'''
+"""
 Chapter : 7 - item : 2 - หาค่า height
 
 ให้น้องรับ input แล้วนำ input นั้นมาสร้าง Binary Search Tree โดย input ตัวแรกสุดจะเป็น Root เสมอ
@@ -14,7 +14,7 @@ Height of this tree is : 3
 Enter Input : 1
 Height of this tree is : 0
 
-'''
+"""
 
 
 class Node:
@@ -52,14 +52,13 @@ class Tree:
         else:
             previous_node.right = new_node
 
-
-    def printTree(self, node, level = 0):
+    def printTree(self, node, level=0):
         if node != None:
             self.printTree(node.right, level + 1)
-            print('     ' * level, node)
+            print("     " * level, node)
             self.printTree(node.left, level + 1)
 
-    def get_height(self, node = None) -> int:
+    def get_height(self, node=None) -> int:
         if node is None:
             node = self.root
 
@@ -78,8 +77,8 @@ class Tree:
 
 
 tree = Tree()
-inp = [int(i) for i in input('Enter Input : ').split()]
+inp = [int(i) for i in input("Enter Input : ").split()]
 for i in inp:
     tree.insert(i)
 height = tree.get_height(tree.root)
-print(f'Height of this tree is : {height}')
+print(f"Height of this tree is : {height}")

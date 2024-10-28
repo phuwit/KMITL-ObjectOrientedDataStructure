@@ -11,7 +11,7 @@ class TreeNode:
         code_point = 0
         for magnitude, char in enumerate(self.data[::-1]):
             # print(char, ord(char) * (1000 ** magnitude))
-            code_point += ord(char) * (1000 ** magnitude)
+            code_point += ord(char) * (1000**magnitude)
         # print(self.data, code_point)
         return code_point
 
@@ -107,7 +107,7 @@ class Tree:
         return _nodes
 
     def get_traversal_code_points(self, _node_data):
-        code_point = ''
+        code_point = ""
         for char in _node_data:
             code_point += str(ord(char))
         return code_point
@@ -169,7 +169,7 @@ nodes, commands = input("Enter Input : ").split("/")
 nodes = nodes.split()
 for node_data in nodes:
     tree.append(node_data)
-print('FIrst look of this plum tree')
+print("FIrst look of this plum tree")
 tree.print(tree.root)
 print("********************************************")
 commands = commands.split(",")

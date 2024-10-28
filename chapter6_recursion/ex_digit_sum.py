@@ -5,6 +5,7 @@ def get_final_digit_sum(number: int) -> int:
         return get_final_digit_sum(number=sumsum)
     return sumsum
 
+
 def get_digit_sum(number: int) -> int:
     if number < 0:
         number = -number

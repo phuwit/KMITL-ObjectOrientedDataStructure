@@ -20,14 +20,15 @@
 # Enter Postfix expression : 3 8 2 / 6 * 5 6 - + 6 6 -5 5 * 2 - - + + +
 # Answer :  65.00
 
-class Stack():
-    def __init__(self, ls = None):
+
+class Stack:
+    def __init__(self, ls=None):
         if ls is None:
             self.__stack = []
         else:
             self.__stack = ls
 
-    def push(self,i):
+    def push(self, i):
         self.__stack.append(i)
 
     def pop(self):
@@ -39,27 +40,27 @@ class Stack():
     def size(self):
         return len(self.__stack)
 
+
 def postFixeval(tokens):
     stack = Stack()
-    EXPRESSIONS_TOKEN = '+-*/'
+    EXPRESSIONS_TOKEN = "+-*/"
     for token in tokens:
         if token in EXPRESSIONS_TOKEN:
             n1 = stack.pop()
             n2 = stack.pop()
-            if token == '+':
+            if token == "+":
                 token = n2 + n1
-            elif token == '-':
+            elif token == "-":
                 token = n2 - n1
-            elif token == '*':
+            elif token == "*":
                 token = n2 * n1
-            elif token == '/':
+            elif token == "/":
                 token = n2 / n1
         stack.push(float(token))
     return stack.pop()
 
 
-
 print(" ***Postfix expression calcuation***")
 input_tokens = list(input("Enter Postfix expression : ").split())
 
-print("Answer : ",'{:.2f}'.format(postFixeval(input_tokens)))
+print("Answer : ", "{:.2f}".format(postFixeval(input_tokens)))

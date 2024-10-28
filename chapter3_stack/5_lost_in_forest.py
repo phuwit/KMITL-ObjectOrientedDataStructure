@@ -95,11 +95,13 @@ class Stack:
 all_commands = input("Enter Input : ").split(",")
 stack = Stack()
 
+
 def get_mushroom_modifier(_height):
     if _height % 2 == 0:
         return -1
     else:
         return 2
+
 
 for command in all_commands:
     command = command.split()

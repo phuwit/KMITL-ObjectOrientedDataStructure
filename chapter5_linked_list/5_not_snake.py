@@ -1,4 +1,4 @@
-'''
+"""
 Chapter : 5 - item : 5 - แม่งูเอ๋ย กินน้ำบ่อไหน?
 
 เเม่งูเอ๋ยกินน้ำบ่อไหน กินน้ำบ่อทราย ย้ายไปก็ย้ายมา~
@@ -29,7 +29,7 @@ Chapter : 5 - item : 5 - แม่งูเอ๋ย กินน้ำบ่อ
 
 (0 เป็นลูกรัก แม่งูจะไม่ให้ตัวนี้ไปหารกับพ่องูเด็ดขาด)
 
-	โดยลูกงูที่หลุดออกจากขบวน จะมานั่งดูแม่งูและลูกคนอื่นๆเล่นเกมต่อไป (แสดงตัวเลขที่หลุดออกจาก  linked-list)
+        โดยลูกงูที่หลุดออกจากขบวน จะมานั่งดูแม่งูและลูกคนอื่นๆเล่นเกมต่อไป (แสดงตัวเลขที่หลุดออกจาก  linked-list)
 
 แม่งูจะตายหากไม่มีลูกงูเกาะแม่งูอยู่เลย แม้ว่าคำสั่งต่อมาจะบอกให้แม่งูบินไปขโมยลูกงูมาก็ตาม
 
@@ -39,7 +39,7 @@ Chapter : 5 - item : 5 - แม่งูเอ๋ย กินน้ำบ่อ
 
 เช่น 	Snake family : 10 9 8 7 (แม่งูคือ 10, และมีลูกงูได้แก่ 9 8 7)
 
-	(10)->9->8->7
+        (10)->9->8->7
 
 - บรรทัดต่อมาจะเป็นการรับคำสั่ง โดย
 
@@ -53,7 +53,7 @@ Chapter : 5 - item : 5 - แม่งูเอ๋ย กินน้ำบ่อ
 
 เช่น 	Snake Game : 10 9 8 7/D 7,SH,SW,F 8
 
-	(10)->9->8->7 (แม่งูคือ 10, และมีลูกงูได้แก่ 9 8 7)
+        (10)->9->8->7 (แม่งูคือ 10, และมีลูกงูได้แก่ 9 8 7)
 
 จะเป็นการเล่นกับพ่องูที่มีขนาดเท่ากับ 7, แม่งูโยก, ลูกสลับตำแหน่ง, แม่งูขโมยลูกงูที่มีขนาด 8 ตามลำดับ
 
@@ -227,7 +227,8 @@ Swap success!
 ------------------------------
 Mom is dead
 Snake Game :
-'''
+"""
+
 
 class DoublyLinkedNode:
     def __init__(self, data):
@@ -235,7 +236,9 @@ class DoublyLinkedNode:
         self.next = None
         self.previous = None
 
+
 alive = True
+
 
 class Snake:
     global alive
@@ -265,7 +268,6 @@ class Snake:
 
         prev1, next1 = node1.previous, node1.next
         prev2, next2 = node2.previous, node2.next
-
 
         node1.previous = node2
         node1.next = next2
@@ -324,7 +326,7 @@ class Snake:
                     result.append(0)
                     self.delete_node(current)
                 else:
-                    print(f'Play success!->{result}')
+                    print(f"Play success!->{result}")
                     return
                 current = pre_node
 
@@ -341,7 +343,7 @@ class Snake:
                         self.delete_node(i)
                         result.append(i.data)
                     result.reverse()
-                    print(f'Play success!->{result}')
+                    print(f"Play success!->{result}")
                     return
                 else:
                     nodes.append(current)
@@ -387,7 +389,7 @@ class Snake:
                 result.append(current.data)
                 self.delete_node(current)
             current = next_node
-        print(f'Shake success!->{result}')
+        print(f"Shake success!->{result}")
 
     def steal(self, number):
         self.append(number)
@@ -431,7 +433,8 @@ class Snake:
             current_child = current_child.next
         if not _list:
             alive = False
-        return f'({mom.data})->{"->".join(_list)}' if _list else f'({mom.data})->Empty'
+        return f'({mom.data})->{"->".join(_list)}' if _list else f"({mom.data})->Empty"
+
 
 snake = Snake()
 

@@ -11,13 +11,13 @@
 # 40
 # 30
 
-input_string = input('Enter Input : ')
-commands = input_string.split(',')
+input_string = input("Enter Input : ")
+commands = input_string.split(",")
 
 weights = []
 frequencies = []
 for command in commands:
-    weight, frequency = (int(n) for n in command.split(' '))
+    weight, frequency = (int(n) for n in command.split(" "))
     while (weights and frequencies) and (weights[-1] < weight):
         print(frequencies.pop())
         weights.pop()
